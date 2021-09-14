@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>None</loc>
+         <loc>https://hasanaburayyan.github.io/aws-cdk-presentation/</loc>
          <lastmod>2021-09-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
+         <loc>https://hasanaburayyan.github.io/aws-cdk-presentation/about/about-me/</loc>
          <lastmod>2021-09-14</lastmod>
          <changefreq>daily</changefreq>
     </url>
