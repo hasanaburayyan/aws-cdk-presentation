@@ -19,6 +19,6 @@ jobs:
           git config user.name "Automation"
           git config user.email "github-actions@github.com"
       - name: Install dependencies
-        run: pip install mkdocs && pip install mkdocs-material
+        run: pip install mkdocs && pip install mkdocs-material 
       - name: Github Pages Release
-        run: mkdoc gh-deploy
+        run: mkdocs build && bkdocs gh-deploy
