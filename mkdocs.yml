@@ -1,0 +1,7 @@
+site_name: AWS Cloud Developer Kit (CDK) Presentation
+repo_url: https://github.com/hasanaburayyan/aws-cdk-presentation
+site_description: A Deep Dive Into AWS CDK!
+nav:
+  - 'index.md'
+  - 'about/about-me.md'
+theme: readthedocs
