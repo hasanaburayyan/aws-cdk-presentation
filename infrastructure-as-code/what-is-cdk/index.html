@@ -11,21 +11,21 @@
       
       
       
-        <link rel="canonical" href="https://hasanaburayyan.github.io/aws-cdk-presentation/">
+        <link rel="canonical" href="https://hasanaburayyan.github.io/aws-cdk-presentation/infrastructure-as-code/what-is-cdk/">
       
-      <link rel="icon" href="assets/images/favicon.png">
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
     
     
       
-        <title>AWS Cloud Developer Kit (CDK) Presentation</title>
+        <title>What is AWS CDK? - AWS Cloud Developer Kit (CDK) Presentation</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.802231af.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.802231af.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.3f5d1f46.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
         
       
     
@@ -57,7 +57,7 @@
     <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
   
     
-    <script>function __prefix(e){return new URL(".",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -65,7 +65,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#aws-cloud-developer-kit-presentation" class="md-skip">
+        <a href="#what-is-aws-cdk" class="md-skip">
           Skip to content
         </a>
       
@@ -76,7 +76,7 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="AWS Cloud Developer Kit (CDK) Presentation" class="md-header__button md-logo" aria-label="AWS Cloud Developer Kit (CDK) Presentation" data-md-component="logo">
+    <a href="../.." title="AWS Cloud Developer Kit (CDK) Presentation" class="md-header__button md-logo" aria-label="AWS Cloud Developer Kit (CDK) Presentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -95,7 +95,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              AWS Cloud Developer Kit Presentation
+              What is AWS CDK?
             
           </span>
         </div>
@@ -173,7 +173,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="AWS Cloud Developer Kit (CDK) Presentation" class="md-nav__button md-logo" aria-label="AWS Cloud Developer Kit (CDK) Presentation" data-md-component="logo">
+    <a href="../.." title="AWS Cloud Developer Kit (CDK) Presentation" class="md-nav__button md-logo" aria-label="AWS Cloud Developer Kit (CDK) Presentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -203,6 +203,36 @@
 
   
   
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        AWS Cloud Developer Kit Presentation
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../iac/" class="md-nav__link">
+        Infrastructure As Code
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
     
   
   
@@ -215,12 +245,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          AWS Cloud Developer Kit Presentation
+          What is AWS CDK?
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="." class="md-nav__link md-nav__link--active">
-        AWS Cloud Developer Kit Presentation
+      <a href="./" class="md-nav__link md-nav__link--active">
+        What is AWS CDK?
       </a>
       
         
@@ -238,37 +268,31 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#intro" class="md-nav__link">
-    Intro
+  <a href="#cdk-vs-pure-cloudformation" class="md-nav__link">
+    CDK vs. Pure CloudFormation
   </a>
   
-    <nav class="md-nav" aria-label="Intro">
+    <nav class="md-nav" aria-label="CDK vs. Pure CloudFormation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#agenda" class="md-nav__link">
-    Agenda
-  </a>
-  
-    <nav class="md-nav" aria-label="Agenda">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#this-repo-is-still-work-in-progress" class="md-nav__link">
-    This Repo is still Work In Progress
+  <a href="#imperative-vs-declarative" class="md-nav__link">
+    Imperative vs. Declarative
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#authored-by" class="md-nav__link">
-    Authored By
+  <a href="#language-choices" class="md-nav__link">
+    Language Choices
   </a>
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#overview-of-benefits" class="md-nav__link">
+    Overview of Benefits
+  </a>
   
 </li>
         
@@ -293,37 +317,7 @@
   
   
     <li class="md-nav__item">
-      <a href="infrastructure-as-code/iac/" class="md-nav__link">
-        Infrastructure As Code
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="infrastructure-as-code/what-is-cdk/" class="md-nav__link">
-        What is AWS CDK?
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="cdk-key-concepts/cdk-key-concepts/" class="md-nav__link">
+      <a href="../../cdk-key-concepts/cdk-key-concepts/" class="md-nav__link">
         CDK Core Concepts
       </a>
     </li>
@@ -338,7 +332,7 @@
   
   
     <li class="md-nav__item">
-      <a href="cdk-key-concepts/constructs/" class="md-nav__link">
+      <a href="../../cdk-key-concepts/constructs/" class="md-nav__link">
         Constructs
       </a>
     </li>
@@ -353,7 +347,7 @@
   
   
     <li class="md-nav__item">
-      <a href="cdk-key-concepts/stacks/" class="md-nav__link">
+      <a href="../../cdk-key-concepts/stacks/" class="md-nav__link">
         Stacks
       </a>
     </li>
@@ -368,7 +362,7 @@
   
   
     <li class="md-nav__item">
-      <a href="cdk-key-concepts/synthesis/" class="md-nav__link">
+      <a href="../../cdk-key-concepts/synthesis/" class="md-nav__link">
         Synthesis
       </a>
     </li>
@@ -383,7 +377,7 @@
   
   
     <li class="md-nav__item">
-      <a href="cdk-key-concepts/construct-tree/" class="md-nav__link">
+      <a href="../../cdk-key-concepts/construct-tree/" class="md-nav__link">
         Construct tree
       </a>
     </li>
@@ -398,7 +392,7 @@
   
   
     <li class="md-nav__item">
-      <a href="cdk-key-concepts/aspects/" class="md-nav__link">
+      <a href="../../cdk-key-concepts/aspects/" class="md-nav__link">
         Aspects
       </a>
     </li>
@@ -413,7 +407,7 @@
   
   
     <li class="md-nav__item">
-      <a href="creating-a-construct/custom-construct/" class="md-nav__link">
+      <a href="../../creating-a-construct/custom-construct/" class="md-nav__link">
         Create A Custom Construct
       </a>
     </li>
@@ -428,7 +422,7 @@
   
   
     <li class="md-nav__item">
-      <a href="creating-a-construct/testing-cdk/" class="md-nav__link">
+      <a href="../../creating-a-construct/testing-cdk/" class="md-nav__link">
         Testing CDK
       </a>
     </li>
@@ -443,7 +437,7 @@
   
   
     <li class="md-nav__item">
-      <a href="about/about-me/" class="md-nav__link">
+      <a href="../../about/about-me/" class="md-nav__link">
         About The Author
       </a>
     </li>
@@ -476,37 +470,31 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#intro" class="md-nav__link">
-    Intro
+  <a href="#cdk-vs-pure-cloudformation" class="md-nav__link">
+    CDK vs. Pure CloudFormation
   </a>
   
-    <nav class="md-nav" aria-label="Intro">
+    <nav class="md-nav" aria-label="CDK vs. Pure CloudFormation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#agenda" class="md-nav__link">
-    Agenda
-  </a>
-  
-    <nav class="md-nav" aria-label="Agenda">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#this-repo-is-still-work-in-progress" class="md-nav__link">
-    This Repo is still Work In Progress
+  <a href="#imperative-vs-declarative" class="md-nav__link">
+    Imperative vs. Declarative
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#authored-by" class="md-nav__link">
-    Authored By
+  <a href="#language-choices" class="md-nav__link">
+    Language Choices
   </a>
   
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#overview-of-benefits" class="md-nav__link">
+    Overview of Benefits
+  </a>
   
 </li>
         
@@ -527,51 +515,83 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/hasanaburayyan/aws-cdk-presentation/edit/master/docs/index.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/hasanaburayyan/aws-cdk-presentation/edit/master/docs/infrastructure-as-code/what-is-cdk.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="aws-cloud-developer-kit-presentation">AWS Cloud Developer Kit Presentation</h1>
-<h2 id="intro">Intro</h2>
-<p>Building and deploying cloud infrastructure can be a little over whelming, ensuring that the infrastructure can be automated to be reliably redeployed is an additional level of complexity. As Infrastructure as Code (IaC) becomes more popular we are seeing some pretty exciting advancements in this field, one in particular is Cloud Development Kits (CDK). Lets take a some time to talk about IaC and what CDK means in uniting developers with managing their infrastructure.</p>
-<hr />
-<h3 id="agenda">Agenda</h3>
-<ul>
-<li>Infrastructure as Code<ul>
-<li>Terraform</li>
-<li>CloudFormation</li>
-<li>CDK</li>
-</ul>
-</li>
-<li>Why CDK<ul>
-<li>Imperative vs Declarative</li>
-<li>The Missing Link (Abstraction)</li>
-<li>Increased Agility</li>
-</ul>
-</li>
-<li>AWS CDK Key Concepts<ul>
-<li>Constructs</li>
-<li>Stacks</li>
-<li>Synthesis</li>
-<li>Aspects</li>
-</ul>
-</li>
-<li>Writing Our First Construct<ul>
-<li>Extending the CDK Construct Class</li>
-<li>Testing our Construct</li>
-</ul>
-</li>
-</ul>
-<h4 id="this-repo-is-still-work-in-progress">This Repo is still Work In Progress</h4>
-<p>Any feedback, questions, or recommendations are greatly appreciated.</p>
-<hr />
-<h4 id="authored-by">Authored By</h4>
-<p>Name: Hasan Abu-Rayyan</p>
-<p>Email: hasanaburayyan21@gmail.com</p>
-<p>Links: <a href="https://www.linkedin.com/in/hasan-abu-rayyan-630563a2/">Linkedin</a>
- | <a href="https://github.com/hasanaburayyan">Github</a>
- | <a href="https://gitlab.com/hasanaburayyan">Gitlab</a></p>
+                <h1 id="what-is-aws-cdk">What is AWS CDK?</h1>
+<p>AWS Cloud Development Kit (CDK) is an opensource software development framework used to define our Infrastructure as Code (IaC). Using CDK allows us to use familiar programming languages
+to provision our AWS Resources. At its core CDK makes use of AWS CloudFormation in order to deploy our AWS resources. This makes having some level of CloudFormation understanding
+very useful as you continue to create your CDK application templates.</p>
+<p><em>Important Note:</em> Keep in mind, though CDK uses CloudFormation we are NOT writing CloudFormation templates in Typescript or Python. We are writing CDK code that happens to 
+use CloudFormation for deployment.</p>
+<h2 id="cdk-vs-pure-cloudformation">CDK vs. Pure CloudFormation</h2>
+<p>This is a loaded topic, which we will discuss at length all through this repo. For now from a high level view here are some key benefits of choosing CDK.</p>
+<h3 id="imperative-vs-declarative">Imperative vs. Declarative</h3>
+<p>As IaC becomes more popular many topics surrounding have been highly debated. One of those that we will discuss at length is Imperative programming vs. Declarative programming.
+Both Imperative and Declarative programming are paradigms that can be followed when we are writing code. To think about how these paradigms differ we can consider the following:
+- Declarative Programming:
+    - Is an expression of logic that does not describe a control flow.
+    - Often more easily understood
+    - "Is what we want"
+- Imperative Programming:
+    - Uses statements to change a program's state.
+    - Finer grain control over execution
+    - "Is how to get what we want"</p>
+<p>CDK is often referred to as an Imperative tool, and at first glance that is the easiest way to view it. Though really CDK is a declarative tool that is broadened by the use of
+imperative programming languages that we used to create our CDK definitions. The idea of using an imperative language to create declarative templates may be a little strange at 
+first, however we will soon see the simplicity behind the concept and what benefits we gain by using it.</p>
+<h3 id="language-choices">Language Choices</h3>
+<p>CDK currently supports:
+- Fully Supported:
+    - TypeScript
+- Supported With Experimental Features:
+    - Python
+    - Java
+    - C#
+- Developer Preview Available:
+    - GO</p>
+<p><em>Important Note:</em> Only Typescript is fully supported with all CDK features. As well it is the ONLY language that has a testing framework we can use to test our code before
+deploying it.</p>
+<h3 id="overview-of-benefits">Overview of Benefits</h3>
+<p>One of the most exciting benefits about CDK is the speed and agility it gives us to create complex AWS Resources. Lets take this example from AWS</p>
+<pre><code class="language-typescript">export class MyEcsConstructStack extends core.Stack {
+  constructor(scope: core.App, id: string, props?: core.StackProps) {
+    super(scope, id, props);
+
+    const vpc = new ec2.Vpc(this, &quot;MyVpc&quot;, {
+      maxAzs: 3 // Default is all AZs in region
+    });
+
+    const cluster = new ecs.Cluster(this, &quot;MyCluster&quot;, {
+      vpc: vpc
+    });
+
+    // Create a load-balanced Fargate service and make it public
+    new ecs_patterns.ApplicationLoadBalancedFargateService(this, &quot;MyFargateService&quot;, {
+      cluster: cluster, // Required
+      cpu: 512, // Default is 256
+      desiredCount: 6, // Default is 1
+      taskImageOptions: { image: ecs.ContainerImage.fromRegistry(&quot;amazon/amazon-ecs-sample&quot;) },
+      memoryLimitMiB: 2048, // Default is 512
+      publicLoadBalancer: true // Default is false
+    });
+  }
+}
+</code></pre>
+<p>The above code snippet produces a CloudFormation template of over 500 lines and 50 resources. <a href="https://github.com/awsdocs/aws-cdk-guide/blob/main/doc_source/my_ecs_construct-stack.yaml">CloudFormation Template HERE</a></p>
+<p>You may also note we did not have to create any IAM roles or policies, that is because CDK will use least privilege principles to generate Roles and Policies for us. 
+Though if we desired defining or adding to the policies we can easily with CDK.</p>
+<p>Some other advantages consist of:
+- Use of logic when defining infrastructure (if statements, loops, etc)
+- Object-oriented techniques that our chosen language provides the tool set for
+- Define high level abstractions, that can be shared across the organization
+- Creating a reusable and sharable infrastructure library
+- Testing infrastructure before we ever deploy
+- IDE Intelli-sense support</p>
+<p><a href="../README.md">Back To Agenda</a></p>
+<p><a href="../reference-application/README.md">Next Topic</a></p>
                 
               
               
@@ -590,15 +610,30 @@
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
+        
+        <a href="../iac/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Infrastructure As Code" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Infrastructure As Code
+            </div>
+          </div>
+        </a>
+      
       
         
-        <a href="infrastructure-as-code/iac/" class="md-footer__link md-footer__link--next" aria-label="Next: Infrastructure As Code" rel="next">
+        <a href="../../cdk-key-concepts/cdk-key-concepts/" class="md-footer__link md-footer__link--next" aria-label="Next: CDK Core Concepts" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Infrastructure As Code
+              CDK Core Concepts
             </div>
           </div>
           <div class="md-footer__button md-icon">
@@ -627,10 +662,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
-      <script src="assets/javascripts/bundle.756773cc.min.js"></script>
+      <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
       
     
   </body>

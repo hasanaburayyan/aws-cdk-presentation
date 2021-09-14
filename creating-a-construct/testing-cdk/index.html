@@ -11,19 +11,21 @@
       
       
       
-      <link rel="icon" href="/aws-cdk-presentation/assets/images/favicon.png">
+        <link rel="canonical" href="https://hasanaburayyan.github.io/aws-cdk-presentation/creating-a-construct/testing-cdk/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
     
     
       
-        <title>AWS Cloud Developer Kit (CDK) Presentation</title>
+        <title>Testing CDK - AWS Cloud Developer Kit (CDK) Presentation</title>
       
     
     
-      <link rel="stylesheet" href="/aws-cdk-presentation/assets/stylesheets/main.802231af.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.802231af.min.css">
       
         
-        <link rel="stylesheet" href="/aws-cdk-presentation/assets/stylesheets/palette.3f5d1f46.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
         
       
     
@@ -55,12 +57,17 @@
     <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
   
     
-    <script>function __prefix(e){return new URL("/aws-cdk-presentation/",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#testing-cdk" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -69,7 +76,7 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/aws-cdk-presentation/." title="AWS Cloud Developer Kit (CDK) Presentation" class="md-header__button md-logo" aria-label="AWS Cloud Developer Kit (CDK) Presentation" data-md-component="logo">
+    <a href="../.." title="AWS Cloud Developer Kit (CDK) Presentation" class="md-header__button md-logo" aria-label="AWS Cloud Developer Kit (CDK) Presentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -88,7 +95,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              Testing CDK
             
           </span>
         </div>
@@ -166,7 +173,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/aws-cdk-presentation/." title="AWS Cloud Developer Kit (CDK) Presentation" class="md-nav__button md-logo" aria-label="AWS Cloud Developer Kit (CDK) Presentation" data-md-component="logo">
+    <a href="../.." title="AWS Cloud Developer Kit (CDK) Presentation" class="md-nav__button md-logo" aria-label="AWS Cloud Developer Kit (CDK) Presentation" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -198,7 +205,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/aws-cdk-presentation/." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         AWS Cloud Developer Kit Presentation
       </a>
     </li>
@@ -213,7 +220,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/aws-cdk-presentation/infrastructure-as-code/iac/" class="md-nav__link">
+      <a href="../../infrastructure-as-code/iac/" class="md-nav__link">
         Infrastructure As Code
       </a>
     </li>
@@ -228,7 +235,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/aws-cdk-presentation/infrastructure-as-code/what-is-cdk/" class="md-nav__link">
+      <a href="../../infrastructure-as-code/what-is-cdk/" class="md-nav__link">
         What is AWS CDK?
       </a>
     </li>
@@ -243,7 +250,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/aws-cdk-presentation/cdk-key-concepts/cdk-key-concepts/" class="md-nav__link">
+      <a href="../../cdk-key-concepts/cdk-key-concepts/" class="md-nav__link">
         CDK Core Concepts
       </a>
     </li>
@@ -258,7 +265,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/aws-cdk-presentation/cdk-key-concepts/constructs/" class="md-nav__link">
+      <a href="../../cdk-key-concepts/constructs/" class="md-nav__link">
         Constructs
       </a>
     </li>
@@ -273,7 +280,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/aws-cdk-presentation/cdk-key-concepts/stacks/" class="md-nav__link">
+      <a href="../../cdk-key-concepts/stacks/" class="md-nav__link">
         Stacks
       </a>
     </li>
@@ -288,7 +295,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/aws-cdk-presentation/cdk-key-concepts/synthesis/" class="md-nav__link">
+      <a href="../../cdk-key-concepts/synthesis/" class="md-nav__link">
         Synthesis
       </a>
     </li>
@@ -303,7 +310,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/aws-cdk-presentation/cdk-key-concepts/construct-tree/" class="md-nav__link">
+      <a href="../../cdk-key-concepts/construct-tree/" class="md-nav__link">
         Construct tree
       </a>
     </li>
@@ -318,7 +325,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/aws-cdk-presentation/cdk-key-concepts/aspects/" class="md-nav__link">
+      <a href="../../cdk-key-concepts/aspects/" class="md-nav__link">
         Aspects
       </a>
     </li>
@@ -333,7 +340,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/aws-cdk-presentation/creating-a-construct/custom-construct/" class="md-nav__link">
+      <a href="../custom-construct/" class="md-nav__link">
         Create A Custom Construct
       </a>
     </li>
@@ -346,11 +353,58 @@
 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="/aws-cdk-presentation/creating-a-construct/testing-cdk/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Testing CDK
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Testing CDK
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#simple-stack-with-tags" class="md-nav__link">
+    Simple Stack With Tags
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-the-stack" class="md-nav__link">
+    Testing The Stack
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -363,7 +417,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/aws-cdk-presentation/about/about-me/" class="md-nav__link">
+      <a href="../../about/about-me/" class="md-nav__link">
         About The Author
       </a>
     </li>
@@ -377,11 +431,118 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#simple-stack-with-tags" class="md-nav__link">
+    Simple Stack With Tags
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-the-stack" class="md-nav__link">
+    Testing The Stack
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
               
-  <h1>404 - Not found</h1>
+                
+                  <a href="https://github.com/hasanaburayyan/aws-cdk-presentation/edit/master/docs/creating-a-construct/testing-cdk.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="testing-cdk">Testing CDK</h1>
+<h2 id="simple-stack-with-tags">Simple Stack With Tags</h2>
+<pre><code class="language-typescript">import * as cdk from &quot;@aws-cdk/core&quot;;
+import {RemovalPolicy} from &quot;@aws-cdk/core&quot;;
+import * as s3 from &quot;@aws-cdk/aws-s3&quot;;
+
+export class SampleStack extends cdk.Stack {
+    constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+        super(scope, id, props);
+
+        let myBucket = new s3.Bucket(this, 'super-cool-bucket', {
+            bucketName: &quot;my-super-cool-bucket&quot;,
+            removalPolicy: RemovalPolicy.DESTROY,
+            publicReadAccess: true
+        });
+
+        cdk.Tags.of(this).add(&quot;cas:created-by&quot;, &quot;rainmakers&quot;)
+        cdk.Tags.of(this).add(&quot;cas:department-code&quot;, &quot;C12345&quot;)
+        cdk.Tags.of(this).add(&quot;cas:environment-type&quot;, &quot;sandbox&quot;)
+        cdk.Tags.of(this).add(&quot;cas:owner&quot;, &quot;rainmakers@cas.org&quot;)
+    }
+}
+
+</code></pre>
+<h2 id="testing-the-stack">Testing The Stack</h2>
+<pre><code class="language-typescript">import * as cdk from '@aws-cdk/core';
+import '@aws-cdk/assert/jest';
+import {expect as expectCDK, haveResource, haveResourceLike} from '@aws-cdk/assert';
+import {SampleStack} from &quot;../lib/sample-stack&quot;;
+
+test('Check Tags', () =&gt; {
+    // GIVEN
+    const app = new cdk.App();
+
+    // WHEN
+    const stack: cdk.Stack = new SampleStack(app, 'my-test-stack')
+
+    // THEN
+    expectCDK(stack).to(haveResourceLike(&quot;AWS::S3::Bucket&quot;, {
+        &quot;Tags&quot;: [
+            {
+                &quot;Key&quot;: &quot;cas:created-by&quot;
+            },
+            {
+                &quot;Key&quot;: &quot;cas:department-code&quot;
+            },
+            {
+                &quot;Key&quot;: &quot;cas:environment-type&quot;
+            },
+            {
+                &quot;Key&quot;: &quot;cas:owner&quot;
+            }
+        ]
+    }))
+});
+</code></pre>
+<p><a href="../README.md">Back To Agenda</a></p>
+<p><a href="">Next Topic</a></p>
+                
+              
+              
+                
+
 
               
             </article>
@@ -392,6 +553,41 @@
       
         
 <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../custom-construct/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Create A Custom Construct" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Create A Custom Construct
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../about/about-me/" class="md-footer__link md-footer__link--next" aria-label="Next: About The Author" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              About The Author
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -412,10 +608,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "/aws-cdk-presentation/", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "/aws-cdk-presentation/assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
-      <script src="/aws-cdk-presentation/assets/javascripts/bundle.756773cc.min.js"></script>
+      <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
       
     
   </body>

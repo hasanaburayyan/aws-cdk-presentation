@@ -1,0 +1,943 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A Deep Dive Into AWS CDK!">
+      
+      
+      
+      
+        <link rel="canonical" href="https://hasanaburayyan.github.io/aws-cdk-presentation/cdk-key-concepts/constructs/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
+    
+    
+      
+        <title>Constructs - AWS Cloud Developer Kit (CDK) Presentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.802231af.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#construct-levels" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AWS Cloud Developer Kit (CDK) Presentation" class="md-header__button md-logo" aria-label="AWS Cloud Developer Kit (CDK) Presentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AWS Cloud Developer Kit (CDK) Presentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Constructs
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/hasanaburayyan/aws-cdk-presentation/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AWS Cloud Developer Kit (CDK) Presentation" class="md-nav__button md-logo" aria-label="AWS Cloud Developer Kit (CDK) Presentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    AWS Cloud Developer Kit (CDK) Presentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/hasanaburayyan/aws-cdk-presentation/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        AWS Cloud Developer Kit Presentation
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../infrastructure-as-code/iac/" class="md-nav__link">
+        Infrastructure As Code
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../infrastructure-as-code/what-is-cdk/" class="md-nav__link">
+        What is AWS CDK?
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cdk-key-concepts/" class="md-nav__link">
+        CDK Core Concepts
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Constructs
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Constructs
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#construct-levels" class="md-nav__link">
+    Construct Levels:
+  </a>
+  
+    <nav class="md-nav" aria-label="Construct Levels:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#level-1-construct-cfnvpc" class="md-nav__link">
+    Level 1 Construct CfnVPC
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-2-construct-vpc" class="md-nav__link">
+    Level 2 Construct VPC
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-3-construct-pattern" class="md-nav__link">
+    Level 3 Construct (Pattern)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bonus-custom-constructs" class="md-nav__link">
+    BONUS Custom Constructs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stacks/" class="md-nav__link">
+        Stacks
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../synthesis/" class="md-nav__link">
+        Synthesis
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../construct-tree/" class="md-nav__link">
+        Construct tree
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aspects/" class="md-nav__link">
+        Aspects
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../creating-a-construct/custom-construct/" class="md-nav__link">
+        Create A Custom Construct
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../creating-a-construct/testing-cdk/" class="md-nav__link">
+        Testing CDK
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/about-me/" class="md-nav__link">
+        About The Author
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#construct-levels" class="md-nav__link">
+    Construct Levels:
+  </a>
+  
+    <nav class="md-nav" aria-label="Construct Levels:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#level-1-construct-cfnvpc" class="md-nav__link">
+    Level 1 Construct CfnVPC
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-2-construct-vpc" class="md-nav__link">
+    Level 2 Construct VPC
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-3-construct-pattern" class="md-nav__link">
+    Level 3 Construct (Pattern)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bonus-custom-constructs" class="md-nav__link">
+    BONUS Custom Constructs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/hasanaburayyan/aws-cdk-presentation/edit/master/docs/cdk-key-concepts/constructs.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                  <h1>Constructs</h1>
+                
+                <h3 id="construct-levels">Construct Levels:</h3>
+<p>The construct library includes 3 level of constructs available to us.
+- L1 Cfn Resources
+    - these constructs are very low level. They represent CloudFormation resources, and require you to explicitly configure all resource properties which requires a deep
+      understanding of the CloudFormation resource model.
+- L2 Intent based Resources
+    - L2 constructs allow us to represent AWS resources in a higher-level context, where we focus on <em>intent-based</em> definitions. This is done via CDK's implementation of
+      default boilerplate, and common best practice logic.
+- L3 Patterns
+    - The highest level of constructs are known as patterns. These are common tasks defined by AWS that involve multiple kinds resources.</p>
+<h4 id="examples">Examples</h4>
+<h5 id="level-1-construct-cfnvpc">Level 1 Construct CfnVPC</h5>
+<p>Here I create a level 1 vpc construct. This construct has 1 required property <code>cidrBlock</code> which you can see matches exactly with the required properties in CloudFormation for
+VPC creation https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpc.html.</p>
+<pre><code class="language-typescript">new ec2.CfnVPC(this, 'level1-vpc', {
+            cidrBlock: &quot;10.0.0.0/16&quot;
+  })
+</code></pre>
+<p>If we take a look at the construct tree produced by this we can see that only 1 resource is being created during synthesis of our CDK</p>
+<pre><code class="language-typescript">construct-tree
+`-- my-new-stack
+     `-- level1-vpc
+
+</code></pre>
+<h5 id="level-2-construct-vpc">Level 2 Construct VPC</h5>
+<p>Now from the same package <code>ec2</code> I will make a VPC using the level 2 construct. Note that this has 0 required properties</p>
+<pre><code class="language-typescript">new ec2.Vpc(this, 'level2-vpc', {
+
+})
+</code></pre>
+<p>Unlike the level 1 construct we can see that this construct tree will create and manage MANY more AWS resources.</p>
+<pre><code class="language-typescript">construct-tree
+`-- my-new-stack
+     `-- level2-vpc
+          |-- Resource
+          |-- PublicSubnet1
+          |    |-- Subnet
+          |    |-- Acl
+          |    |-- RouteTable
+          |    |-- RouteTableAssociation
+          |    |-- DefaultRoute
+          |    |-- EIP
+          |    `-- NATGateway
+          |-- PublicSubnet2
+          |    |-- Subnet
+          |    |-- Acl
+          |    |-- RouteTable
+          |    |-- RouteTableAssociation
+          |    |-- DefaultRoute
+          |    |-- EIP
+          |    `-- NATGateway
+          |-- PublicSubnet3
+          |    |-- Subnet
+          |    |-- Acl
+          |    |-- RouteTable
+          |    |-- RouteTableAssociation
+          |    |-- DefaultRoute
+          |    |-- EIP
+          |    `-- NATGateway
+          |-- PrivateSubnet1
+          |    |-- Subnet
+          |    |-- Acl
+          |    |-- RouteTable
+          |    |-- RouteTableAssociation
+          |    `-- DefaultRoute
+          |-- PrivateSubnet2
+          |    |-- Subnet
+          |    |-- Acl
+          |    |-- RouteTable
+          |    |-- RouteTableAssociation
+          |    `-- DefaultRoute
+          |-- PrivateSubnet3
+          |    |-- Subnet
+          |    |-- Acl
+          |    |-- RouteTable
+          |    |-- RouteTableAssociation
+          |    `-- DefaultRoute
+          |-- IGW
+          `-- VPCGW
+
+</code></pre>
+<h5 id="level-3-construct-pattern">Level 3 Construct (Pattern)</h5>
+<p>Here I am going to use a level 3 construct called ecs pattern <code>ApplicationLoadbalancedFargateService</code></p>
+<pre><code class="language-typescript">new ecsPatterns.ApplicationLoadBalancedFargateService(this, 'level3-ecs-pattern', {
+            taskImageOptions: {
+                image: ecs.ContainerImage.fromEcrRepository(
+                    ecr.Repository.fromRepositoryName(this, 'my-nginx-repo', 'nginx')
+                )
+            }
+        })
+</code></pre>
+<p>Now when we take a look at our construct tree we can see that many resources are being created here just like with the previous level 2 examples. The big
+difference here is that this level 3 construct is creating resources from other libraries other than just the ecs package. We can see below the following:
+- ecs (cluster, task, services)
+- ec2 (load balancers, security groups, vpc, etc...)
+- Cloudwatch (log groups)</p>
+<pre><code class="language-typescript">construct-tree
+`-- my-new-stack
+     |-- my-nginx-repo
+     |-- level3-ecs-pattern
+     |    |-- LB
+     |    |    |-- Resource
+     |    |    |-- SecurityGroup
+     |    |    |    |-- Resource
+     |    |    |    `-- to mynewstacklevel3ecspatternServiceSecurityGroup4E669D7C:80
+     |    |    `-- PublicListener
+     |    |         |-- Resource
+     |    |         `-- ECSGroup
+     |    |              `-- Resource
+     |    |-- LoadBalancerDNS
+     |    |-- ServiceURL
+     |    |-- TaskDef
+     |    |    |-- TaskRole
+     |    |    |    `-- Resource
+     |    |    |-- Resource
+     |    |    |-- web
+     |    |    |    `-- LogGroup
+     |    |    |         `-- Resource
+     |    |    `-- ExecutionRole
+     |    |         |-- Resource
+     |    |         `-- DefaultPolicy
+     |    |              `-- Resource
+     |    `-- Service
+     |         |-- Service
+     |         `-- SecurityGroup
+     |              |-- Resource
+     |              |-- from mynewstacklevel3ecspatternLBSecurityGroup2A462752:80
+     `-- EcsDefaultClusterMnL3mNNYN
+          |-- Resource
+          `-- Vpc
+               |-- Resource
+               |-- PublicSubnet1
+               |    |-- Subnet
+               |    |-- Acl
+               |    |-- RouteTable
+               |    |-- RouteTableAssociation
+               |    |-- DefaultRoute
+               |    |-- EIP
+               |    `-- NATGateway
+               |-- PublicSubnet2
+               |    |-- Subnet
+               |    |-- Acl
+               |    |-- RouteTable
+               |    |-- RouteTableAssociation
+               |    |-- DefaultRoute
+               |    |-- EIP
+               |    `-- NATGateway
+               |-- PrivateSubnet1
+               |    |-- Subnet
+               |    |-- Acl
+               |    |-- RouteTable
+               |    |-- RouteTableAssociation
+               |    `-- DefaultRoute
+               |-- PrivateSubnet2
+               |    |-- Subnet
+               |    |-- Acl
+               |    |-- RouteTable
+               |    |-- RouteTableAssociation
+               |    `-- DefaultRoute
+               |-- IGW
+               `-- VPCGW
+
+</code></pre>
+<h5 id="bonus-custom-constructs">BONUS Custom Constructs</h5>
+<p><em>Please note this is purely an example and not an approved pattern that is ready for use</em>
+We built a custom construct that we reused for deploying each component of our reference application
+it creates a pipeline with a source, build, and deploy step. The deploy step will be done following the
+AWS documentation for best practice Blue/Green deployments</p>
+<pre><code class="language-typescript">new RainmakersEcsDeploymentService(this,
+            'my-blue-green-ecs-service',
+            app,
+            WARDROBE_BACKEND_ECS_DEFINITION,
+            env,
+            cluster
+)
+</code></pre>
+<p>We can see our construct tree plans to deploy a vast array of different AWS resources.</p>
+<pre><code class="language-typescript">construct-tree
+`-- my-new-stack
+     |-- my-cluster
+     |    |-- hsa29-my-fun-app-vpc
+     |    |    |-- PrivateSubnet1
+     |    |    `-- PrivateSubnet2
+     |    `-- hsa29-my-fun-app-ecs-cluster
+     |         |-- Resource
+     |         `-- DefaultServiceDiscoveryNamespace
+     |              `-- Resource
+     `-- my-blue-green-ecs-service
+          |-- wardrobe-backend-ecs-loadbalancer-stack
+          |    |-- hsa29-my-fun-app-vpc
+          |    |    |-- PrivateSubnet1
+          |    |    |-- PrivateSubnet2
+          |    |-- hsa29-my-fun-app-wardrobe-backend-security-group
+          |    |    |-- Resource
+          |    |    |-- from mynewstackmybluegreenecsservicewardrobebackendecsloadbalancerstackhsa29myfunappwardrobebackendsecuritygroup035AAFD5:80
+          |    |    `-- from mynewstackmybluegreenecsservicewardrobebackendecsloadbalancerstackhsa29myfunappwardrobebackendsecuritygroup035AAFD5:8080
+          |    |-- hsa29-my-fun-app-wardrobe-backend-alb
+          |    |    |-- Resource
+          |    |    |-- hsa29-my-fun-app-wardrobe-backend-albProdListener
+          |    |    |    `-- Resource
+          |    |    `-- hsa29-my-fun-app-wardrobe-backend-albTestListener
+          |    |         `-- Resource
+          |    |-- hsa29-my-fun-app-wardrobe-backend-blueGroup
+          |    |    `-- Resource
+          |    `-- hsa29-my-fun-app-wardrobe-backend-greenGroup
+          |         `-- Resource
+          |-- wardrobe-backend-ecs-service-stack
+          |    |-- hsa29-my-fun-app-vpc
+          |    |    |-- PrivateSubnet1
+          |    |    |-- PrivateSubnet2
+          |    |-- hsa29-my-fun-app-wardrobe-backend
+          |    |-- wardrobe-backend-hsa29-ecsTaskRoleForWorkshop
+          |    |    |-- Resource
+          |    |    `-- DefaultPolicy
+          |    |         `-- Resource
+          |    |-- hsa29dummy-task-for-wardrobe-backend
+          |    |    |-- Resource
+          |    |    `-- hsa29-dummy-container-def-for-wardrobe-backend
+          |    |-- hsa29-dummy-container-for-wardrobe-backend
+          |    |    `-- Resource
+          |    |-- hsa29-my-fun-app-wardrobe-backend-app-task-def
+          |    |    |-- Resource
+          |    |    `-- hsa29-my-fun-app-wardrobe-backend-container
+          |    |-- hsa29-my-fun-app-demo-app-log-group
+          |    |    `-- Resource
+          |    |-- hsa29-my-fun-app-wardrobe-backend-cloudmap
+          |    `-- hsa29-my-fun-app-wardrobe-backend-service
+          |         |-- Service
+          |         `-- CloudmapService
+          |              `-- Resource
+          |-- wardrobe-backend-ecs-cloudwatch-stack
+          |    |-- hsa29-my-fun-app-blue4xxErrors
+          |    |    `-- Resource
+          |    `-- green4xxErrors
+          |         `-- Resource
+          |-- wardrobe-backend-ecs-code-deploy-stack
+          |    |-- hsa29-my-fun-app-wardrobe-backend-ecs-codedeploy
+          |    |    `-- Resource
+          |    `-- codeDeployServiceRole
+          |         `-- Resource
+          |-- wardrobe-backend-ecs-code-deploy-groups-stack
+          |    |-- hsa29-my-fun-app-ecs-codedeploy-custom-lambda-role
+          |    |    |-- Resource
+          |    |    `-- DefaultPolicy
+          |    |         `-- Resource
+          |    |-- hsa29-my-fun-app-createDeploymentGroupLambda
+          |    |    |-- Code
+          |    |    |    |-- Stage
+          |    |    |    `-- AssetBucket
+          |    |    |         `-- Notifications
+          |    |    `-- Resource
+          |    |-- AssetParameters
+          |    |    `-- d2afc96a67784738f55fa36aabb3e2fcfc18ddcae4383342d8386a7c5052db84
+          |    |         |-- S3Bucket
+          |    |         |-- S3VersionKey
+          |    |         `-- ArtifactHash
+          |    |-- customEcsDeploymentGroup
+          |    |    `-- Default
+          |    `-- hsa29-my-fun-app-wardrobe-backend-ecs-deployment-group
+          `-- wardrobe-backend-ecs-pipeline-stack
+               |-- hsa29-my-fun-app-repository
+               |    |-- mynewstackmybluegreenecsservicewardrobebackendecspipelinestackhsa29myfunappwardrobebackendcodepipeline2053DEC1EventRule
+               |    |    `-- Resource
+               |    `-- hsa29-my-fun-app-on-commit
+               |         `-- Resource
+               |-- hsa29-my-fun-app-wardrobe-backend-ecr
+               |-- hsa29-my-fun-app-wardrobe-backend-code-build
+               |    |-- Role
+               |    |    |-- Resource
+               |    |    `-- DefaultPolicy
+               |    |         `-- Resource
+               |    `-- Resource
+               |-- hsa29-my-fun-app-wardrobe-backend-code-pipeline
+               |    |-- ArtifactsBucket
+               |    |    |-- Notifications
+               |    |    `-- Resource
+               |    |-- Role
+               |    |    |-- Resource
+               |    |    |-- DefaultPolicy
+               |    |    |    `-- Resource
+               |    |-- Resource
+               |    |-- Source
+               |    |    `-- hsa29-my-fun-app-CodeCommit_Source
+               |    |         `-- CodePipelineActionRole
+               |    |              |-- Resource
+               |    |              `-- DefaultPolicy
+               |    |                   `-- Resource
+               |    |-- EventsRole
+               |    |    |-- Resource
+               |    |    `-- DefaultPolicy
+               |    |         `-- Resource
+               |    |-- Build
+               |    |    `-- hsa29-my-fun-app-CodeBuild_Project
+               |    |         `-- CodePipelineActionRole
+               |    |              |-- Resource
+               |    |              |-- DefaultPolicy
+               |    |              |    `-- Resource
+               |    `-- Deploy
+               |         `-- Deploy
+               |              `-- CodePipelineActionRole
+               |                   |-- Resource
+               |                   |-- DefaultPolicy
+               |                   |    `-- Resource
+               |-- hsa29-my-fun-app-wardrobe-backend-ecsBlueGreenCodeRepo
+               `-- hsa29-my-fun-app-wardrobe-backend-ecsBlueGreenLBDns
+
+</code></pre>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../cdk-key-concepts/" class="md-footer__link md-footer__link--prev" aria-label="Previous: CDK Core Concepts" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              CDK Core Concepts
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../stacks/" class="md-footer__link md-footer__link--next" aria-label="Next: Stacks" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Stacks
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
+      
+    
+  </body>
+</html>
