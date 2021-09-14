@@ -25,6 +25,10 @@ Building and deploying cloud infrastructure can be a little over whelming, ensur
     - Extending the CDK Construct Class
     - Testing our Construct
 
+#### This Repo is still Work In Progress
+
+Any feedback, questions, or recommendations are greatly appreciated.
+
 ----------
 
 #### Authored By

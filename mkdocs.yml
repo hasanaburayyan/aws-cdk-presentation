@@ -4,5 +4,15 @@ site_description: A Deep Dive Into AWS CDK!
 repo_url: https://github.com/hasanaburayyan/aws-cdk-presentation
 nav:
   - 'index.md'
+  - 'infrastructure-as-code/iac.md'
+  - 'infrastructure-as-code/what-is-cdk.md'
+  - 'cdk-key-concepts/cdk-key-concepts.md'
+  - 'cdk-key-concepts/constructs.md'
+  - 'cdk-key-concepts/stacks.md'
+  - 'cdk-key-concepts/synthesis.md'
+  - 'cdk-key-concepts/construct-tree.md'
+  - 'cdk-key-concepts/aspects.md'
+  - 'creating-a-construct/custom-construct.md'
+  - 'creating-a-construct/testing-cdk.md'
   - 'about/about-me.md'
 theme: material
