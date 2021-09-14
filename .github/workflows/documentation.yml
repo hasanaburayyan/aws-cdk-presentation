@@ -21,4 +21,4 @@ jobs:
       - name: Install dependencies
         run: pip install mkdocs && pip install mkdocs-material 
       - name: Github Pages Release
-        run: mkdocs build && bkdocs gh-deploy
+        run: mkdocs build && mkdocs gh-deploy
