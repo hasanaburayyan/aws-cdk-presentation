@@ -40,6 +40,8 @@
     
     
     
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
     
       
 
@@ -453,6 +455,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../../building-reusable-code/building-reusable-code/" class="md-nav__link">
+        Building Reusable Code
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../about/about-me/" class="md-nav__link">
         About The Author
       </a>
@@ -569,300 +586,296 @@
 <h4 id="examples">Examples</h4>
 <h5 id="level-1-construct-cfnvpc">Level 1 Construct CfnVPC</h5>
 <p>Here I create a level 1 vpc construct. This construct has 1 required property <code>cidrBlock</code> which you can see matches exactly with the required properties in CloudFormation for
-VPC creation https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpc.html.</p>
-<pre><code class="language-typescript">new ec2.CfnVPC(this, 'level1-vpc', {
-            cidrBlock: &quot;10.0.0.0/16&quot;
-  })
-</code></pre>
-<p>If we take a look at the construct tree produced by this we can see that only 1 resource is being created during synthesis of our CDK</p>
-<pre><code class="language-typescript">construct-tree
-`-- my-new-stack
-     `-- level1-vpc
-
-</code></pre>
+VPC creation https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpc.html.
+<div class="highlight"><pre><span></span><code><span class="ow">new</span> <span class="nx">ec2</span><span class="p">.</span><span class="nx">CfnVPC</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s1">&#39;level1-vpc&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="nx">cidrBlock</span><span class="o">:</span> <span class="s2">&quot;10.0.0.0/16&quot;</span>
+  <span class="p">})</span>
+</code></pre></div>
+If we take a look at the construct tree produced by this we can see that only 1 resource is being created during synthesis of our CDK
+<div class="highlight"><pre><span></span><code><span class="nx">construct</span><span class="o">-</span><span class="nx">tree</span>
+<span class="sb">`-- my-new-stack</span>
+<span class="sb">     `</span><span class="o">--</span> <span class="nx">level1</span><span class="o">-</span><span class="nx">vpc</span>
+</code></pre></div></p>
 <h5 id="level-2-construct-vpc">Level 2 Construct VPC</h5>
-<p>Now from the same package <code>ec2</code> I will make a VPC using the level 2 construct. Note that this has 0 required properties</p>
-<pre><code class="language-typescript">new ec2.Vpc(this, 'level2-vpc', {
+<p>Now from the same package <code>ec2</code> I will make a VPC using the level 2 construct. Note that this has 0 required properties
+<div class="highlight"><pre><span></span><code><span class="ow">new</span> <span class="nx">ec2</span><span class="p">.</span><span class="nx">Vpc</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s1">&#39;level2-vpc&#39;</span><span class="p">,</span> <span class="p">{</span>
 
-})
-</code></pre>
-<p>Unlike the level 1 construct we can see that this construct tree will create and manage MANY more AWS resources.</p>
-<pre><code class="language-typescript">construct-tree
-`-- my-new-stack
-     `-- level2-vpc
-          |-- Resource
-          |-- PublicSubnet1
-          |    |-- Subnet
-          |    |-- Acl
-          |    |-- RouteTable
-          |    |-- RouteTableAssociation
-          |    |-- DefaultRoute
-          |    |-- EIP
-          |    `-- NATGateway
-          |-- PublicSubnet2
-          |    |-- Subnet
-          |    |-- Acl
-          |    |-- RouteTable
-          |    |-- RouteTableAssociation
-          |    |-- DefaultRoute
-          |    |-- EIP
-          |    `-- NATGateway
-          |-- PublicSubnet3
-          |    |-- Subnet
-          |    |-- Acl
-          |    |-- RouteTable
-          |    |-- RouteTableAssociation
-          |    |-- DefaultRoute
-          |    |-- EIP
-          |    `-- NATGateway
-          |-- PrivateSubnet1
-          |    |-- Subnet
-          |    |-- Acl
-          |    |-- RouteTable
-          |    |-- RouteTableAssociation
-          |    `-- DefaultRoute
-          |-- PrivateSubnet2
-          |    |-- Subnet
-          |    |-- Acl
-          |    |-- RouteTable
-          |    |-- RouteTableAssociation
-          |    `-- DefaultRoute
-          |-- PrivateSubnet3
-          |    |-- Subnet
-          |    |-- Acl
-          |    |-- RouteTable
-          |    |-- RouteTableAssociation
-          |    `-- DefaultRoute
-          |-- IGW
-          `-- VPCGW
-
-</code></pre>
+<span class="p">})</span>
+</code></pre></div>
+Unlike the level 1 construct we can see that this construct tree will create and manage MANY more AWS resources.
+<div class="highlight"><pre><span></span><code><span class="nx">construct</span><span class="o">-</span><span class="nx">tree</span>
+<span class="sb">`-- my-new-stack</span>
+<span class="sb">     `</span><span class="o">--</span> <span class="nx">level2</span><span class="o">-</span><span class="nx">vpc</span>
+          <span class="o">|--</span> <span class="nx">Resource</span>
+          <span class="o">|--</span> <span class="nx">PublicSubnet1</span>
+          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Subnet</span>
+          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Acl</span>
+          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">RouteTable</span>
+          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">RouteTableAssociation</span>
+          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">DefaultRoute</span>
+          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">EIP</span>
+          <span class="o">|</span>    <span class="sb">`-- NATGateway</span>
+<span class="sb">          |-- PublicSubnet2</span>
+<span class="sb">          |    |-- Subnet</span>
+<span class="sb">          |    |-- Acl</span>
+<span class="sb">          |    |-- RouteTable</span>
+<span class="sb">          |    |-- RouteTableAssociation</span>
+<span class="sb">          |    |-- DefaultRoute</span>
+<span class="sb">          |    |-- EIP</span>
+<span class="sb">          |    `</span><span class="o">--</span> <span class="nx">NATGateway</span>
+          <span class="o">|--</span> <span class="nx">PublicSubnet3</span>
+          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Subnet</span>
+          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Acl</span>
+          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">RouteTable</span>
+          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">RouteTableAssociation</span>
+          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">DefaultRoute</span>
+          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">EIP</span>
+          <span class="o">|</span>    <span class="sb">`-- NATGateway</span>
+<span class="sb">          |-- PrivateSubnet1</span>
+<span class="sb">          |    |-- Subnet</span>
+<span class="sb">          |    |-- Acl</span>
+<span class="sb">          |    |-- RouteTable</span>
+<span class="sb">          |    |-- RouteTableAssociation</span>
+<span class="sb">          |    `</span><span class="o">--</span> <span class="nx">DefaultRoute</span>
+          <span class="o">|--</span> <span class="nx">PrivateSubnet2</span>
+          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Subnet</span>
+          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Acl</span>
+          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">RouteTable</span>
+          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">RouteTableAssociation</span>
+          <span class="o">|</span>    <span class="sb">`-- DefaultRoute</span>
+<span class="sb">          |-- PrivateSubnet3</span>
+<span class="sb">          |    |-- Subnet</span>
+<span class="sb">          |    |-- Acl</span>
+<span class="sb">          |    |-- RouteTable</span>
+<span class="sb">          |    |-- RouteTableAssociation</span>
+<span class="sb">          |    `</span><span class="o">--</span> <span class="nx">DefaultRoute</span>
+          <span class="o">|--</span> <span class="nx">IGW</span>
+          <span class="sb">`-- VPCGW</span>
+</code></pre></div></p>
 <h5 id="level-3-construct-pattern">Level 3 Construct (Pattern)</h5>
-<p>Here I am going to use a level 3 construct called ecs pattern <code>ApplicationLoadbalancedFargateService</code></p>
-<pre><code class="language-typescript">new ecsPatterns.ApplicationLoadBalancedFargateService(this, 'level3-ecs-pattern', {
-            taskImageOptions: {
-                image: ecs.ContainerImage.fromEcrRepository(
-                    ecr.Repository.fromRepositoryName(this, 'my-nginx-repo', 'nginx')
-                )
-            }
-        })
-</code></pre>
-<p>Now when we take a look at our construct tree we can see that many resources are being created here just like with the previous level 2 examples. The big
+<p>Here I am going to use a level 3 construct called ecs pattern <code>ApplicationLoadbalancedFargateService</code>
+<div class="highlight"><pre><span></span><code><span class="ow">new</span> <span class="nx">ecsPatterns</span><span class="p">.</span><span class="nx">ApplicationLoadBalancedFargateService</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s1">&#39;level3-ecs-pattern&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="nx">taskImageOptions</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">image</span>: <span class="kt">ecs.ContainerImage.fromEcrRepository</span><span class="p">(</span>
+                    <span class="nx">ecr</span><span class="p">.</span><span class="nx">Repository</span><span class="p">.</span><span class="nx">fromRepositoryName</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s1">&#39;my-nginx-repo&#39;</span><span class="p">,</span> <span class="s1">&#39;nginx&#39;</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">})</span>
+</code></pre></div>
+Now when we take a look at our construct tree we can see that many resources are being created here just like with the previous level 2 examples. The big
 difference here is that this level 3 construct is creating resources from other libraries other than just the ecs package. We can see below the following:
 - ecs (cluster, task, services)
 - ec2 (load balancers, security groups, vpc, etc...)
-- Cloudwatch (log groups)</p>
-<pre><code class="language-typescript">construct-tree
-`-- my-new-stack
-     |-- my-nginx-repo
-     |-- level3-ecs-pattern
-     |    |-- LB
-     |    |    |-- Resource
-     |    |    |-- SecurityGroup
-     |    |    |    |-- Resource
-     |    |    |    `-- to mynewstacklevel3ecspatternServiceSecurityGroup4E669D7C:80
-     |    |    `-- PublicListener
-     |    |         |-- Resource
-     |    |         `-- ECSGroup
-     |    |              `-- Resource
-     |    |-- LoadBalancerDNS
-     |    |-- ServiceURL
-     |    |-- TaskDef
-     |    |    |-- TaskRole
-     |    |    |    `-- Resource
-     |    |    |-- Resource
-     |    |    |-- web
-     |    |    |    `-- LogGroup
-     |    |    |         `-- Resource
-     |    |    `-- ExecutionRole
-     |    |         |-- Resource
-     |    |         `-- DefaultPolicy
-     |    |              `-- Resource
-     |    `-- Service
-     |         |-- Service
-     |         `-- SecurityGroup
-     |              |-- Resource
-     |              |-- from mynewstacklevel3ecspatternLBSecurityGroup2A462752:80
-     `-- EcsDefaultClusterMnL3mNNYN
-          |-- Resource
-          `-- Vpc
-               |-- Resource
-               |-- PublicSubnet1
-               |    |-- Subnet
-               |    |-- Acl
-               |    |-- RouteTable
-               |    |-- RouteTableAssociation
-               |    |-- DefaultRoute
-               |    |-- EIP
-               |    `-- NATGateway
-               |-- PublicSubnet2
-               |    |-- Subnet
-               |    |-- Acl
-               |    |-- RouteTable
-               |    |-- RouteTableAssociation
-               |    |-- DefaultRoute
-               |    |-- EIP
-               |    `-- NATGateway
-               |-- PrivateSubnet1
-               |    |-- Subnet
-               |    |-- Acl
-               |    |-- RouteTable
-               |    |-- RouteTableAssociation
-               |    `-- DefaultRoute
-               |-- PrivateSubnet2
-               |    |-- Subnet
-               |    |-- Acl
-               |    |-- RouteTable
-               |    |-- RouteTableAssociation
-               |    `-- DefaultRoute
-               |-- IGW
-               `-- VPCGW
-
-</code></pre>
+- Cloudwatch (log groups)
+<div class="highlight"><pre><span></span><code><span class="nx">construct</span><span class="o">-</span><span class="nx">tree</span>
+<span class="sb">`-- my-new-stack</span>
+<span class="sb">     |-- my-nginx-repo</span>
+<span class="sb">     |-- level3-ecs-pattern</span>
+<span class="sb">     |    |-- LB</span>
+<span class="sb">     |    |    |-- Resource</span>
+<span class="sb">     |    |    |-- SecurityGroup</span>
+<span class="sb">     |    |    |    |-- Resource</span>
+<span class="sb">     |    |    |    `</span><span class="o">--</span> <span class="nx">to</span> <span class="nx">mynewstacklevel3ecspatternServiceSecurityGroup4E669D7C</span>:<span class="kt">80</span>
+     <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- PublicListener</span>
+<span class="sb">     |    |         |-- Resource</span>
+<span class="sb">     |    |         `</span><span class="o">--</span> <span class="nx">ECSGroup</span>
+     <span class="o">|</span>    <span class="o">|</span>              <span class="sb">`-- Resource</span>
+<span class="sb">     |    |-- LoadBalancerDNS</span>
+<span class="sb">     |    |-- ServiceURL</span>
+<span class="sb">     |    |-- TaskDef</span>
+<span class="sb">     |    |    |-- TaskRole</span>
+<span class="sb">     |    |    |    `</span><span class="o">--</span> <span class="nx">Resource</span>
+     <span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Resource</span>
+     <span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">web</span>
+     <span class="o">|</span>    <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- LogGroup</span>
+<span class="sb">     |    |    |         `</span><span class="o">--</span> <span class="nx">Resource</span>
+     <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- ExecutionRole</span>
+<span class="sb">     |    |         |-- Resource</span>
+<span class="sb">     |    |         `</span><span class="o">--</span> <span class="nx">DefaultPolicy</span>
+     <span class="o">|</span>    <span class="o">|</span>              <span class="sb">`-- Resource</span>
+<span class="sb">     |    `</span><span class="o">--</span> <span class="nx">Service</span>
+     <span class="o">|</span>         <span class="o">|--</span> <span class="nx">Service</span>
+     <span class="o">|</span>         <span class="sb">`-- SecurityGroup</span>
+<span class="sb">     |              |-- Resource</span>
+<span class="sb">     |              |-- from mynewstacklevel3ecspatternLBSecurityGroup2A462752:80</span>
+<span class="sb">     `</span><span class="o">--</span> <span class="nx">EcsDefaultClusterMnL3mNNYN</span>
+          <span class="o">|--</span> <span class="nx">Resource</span>
+          <span class="sb">`-- Vpc</span>
+<span class="sb">               |-- Resource</span>
+<span class="sb">               |-- PublicSubnet1</span>
+<span class="sb">               |    |-- Subnet</span>
+<span class="sb">               |    |-- Acl</span>
+<span class="sb">               |    |-- RouteTable</span>
+<span class="sb">               |    |-- RouteTableAssociation</span>
+<span class="sb">               |    |-- DefaultRoute</span>
+<span class="sb">               |    |-- EIP</span>
+<span class="sb">               |    `</span><span class="o">--</span> <span class="nx">NATGateway</span>
+               <span class="o">|--</span> <span class="nx">PublicSubnet2</span>
+               <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Subnet</span>
+               <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Acl</span>
+               <span class="o">|</span>    <span class="o">|--</span> <span class="nx">RouteTable</span>
+               <span class="o">|</span>    <span class="o">|--</span> <span class="nx">RouteTableAssociation</span>
+               <span class="o">|</span>    <span class="o">|--</span> <span class="nx">DefaultRoute</span>
+               <span class="o">|</span>    <span class="o">|--</span> <span class="nx">EIP</span>
+               <span class="o">|</span>    <span class="sb">`-- NATGateway</span>
+<span class="sb">               |-- PrivateSubnet1</span>
+<span class="sb">               |    |-- Subnet</span>
+<span class="sb">               |    |-- Acl</span>
+<span class="sb">               |    |-- RouteTable</span>
+<span class="sb">               |    |-- RouteTableAssociation</span>
+<span class="sb">               |    `</span><span class="o">--</span> <span class="nx">DefaultRoute</span>
+               <span class="o">|--</span> <span class="nx">PrivateSubnet2</span>
+               <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Subnet</span>
+               <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Acl</span>
+               <span class="o">|</span>    <span class="o">|--</span> <span class="nx">RouteTable</span>
+               <span class="o">|</span>    <span class="o">|--</span> <span class="nx">RouteTableAssociation</span>
+               <span class="o">|</span>    <span class="sb">`-- DefaultRoute</span>
+<span class="sb">               |-- IGW</span>
+<span class="sb">               `</span><span class="o">--</span> <span class="nx">VPCGW</span>
+</code></pre></div></p>
 <h5 id="bonus-custom-constructs">BONUS Custom Constructs</h5>
 <p><em>Please note this is purely an example and not an approved pattern that is ready for use</em>
 We built a custom construct that we reused for deploying each component of our reference application
 it creates a pipeline with a source, build, and deploy step. The deploy step will be done following the
-AWS documentation for best practice Blue/Green deployments</p>
-<pre><code class="language-typescript">new RainmakersEcsDeploymentService(this,
-            'my-blue-green-ecs-service',
-            app,
-            WARDROBE_BACKEND_ECS_DEFINITION,
-            env,
-            cluster
-)
-</code></pre>
-<p>We can see our construct tree plans to deploy a vast array of different AWS resources.</p>
-<pre><code class="language-typescript">construct-tree
-`-- my-new-stack
-     |-- my-cluster
-     |    |-- hsa29-my-fun-app-vpc
-     |    |    |-- PrivateSubnet1
-     |    |    `-- PrivateSubnet2
-     |    `-- hsa29-my-fun-app-ecs-cluster
-     |         |-- Resource
-     |         `-- DefaultServiceDiscoveryNamespace
-     |              `-- Resource
-     `-- my-blue-green-ecs-service
-          |-- wardrobe-backend-ecs-loadbalancer-stack
-          |    |-- hsa29-my-fun-app-vpc
-          |    |    |-- PrivateSubnet1
-          |    |    |-- PrivateSubnet2
-          |    |-- hsa29-my-fun-app-wardrobe-backend-security-group
-          |    |    |-- Resource
-          |    |    |-- from mynewstackmybluegreenecsservicewardrobebackendecsloadbalancerstackhsa29myfunappwardrobebackendsecuritygroup035AAFD5:80
-          |    |    `-- from mynewstackmybluegreenecsservicewardrobebackendecsloadbalancerstackhsa29myfunappwardrobebackendsecuritygroup035AAFD5:8080
-          |    |-- hsa29-my-fun-app-wardrobe-backend-alb
-          |    |    |-- Resource
-          |    |    |-- hsa29-my-fun-app-wardrobe-backend-albProdListener
-          |    |    |    `-- Resource
-          |    |    `-- hsa29-my-fun-app-wardrobe-backend-albTestListener
-          |    |         `-- Resource
-          |    |-- hsa29-my-fun-app-wardrobe-backend-blueGroup
-          |    |    `-- Resource
-          |    `-- hsa29-my-fun-app-wardrobe-backend-greenGroup
-          |         `-- Resource
-          |-- wardrobe-backend-ecs-service-stack
-          |    |-- hsa29-my-fun-app-vpc
-          |    |    |-- PrivateSubnet1
-          |    |    |-- PrivateSubnet2
-          |    |-- hsa29-my-fun-app-wardrobe-backend
-          |    |-- wardrobe-backend-hsa29-ecsTaskRoleForWorkshop
-          |    |    |-- Resource
-          |    |    `-- DefaultPolicy
-          |    |         `-- Resource
-          |    |-- hsa29dummy-task-for-wardrobe-backend
-          |    |    |-- Resource
-          |    |    `-- hsa29-dummy-container-def-for-wardrobe-backend
-          |    |-- hsa29-dummy-container-for-wardrobe-backend
-          |    |    `-- Resource
-          |    |-- hsa29-my-fun-app-wardrobe-backend-app-task-def
-          |    |    |-- Resource
-          |    |    `-- hsa29-my-fun-app-wardrobe-backend-container
-          |    |-- hsa29-my-fun-app-demo-app-log-group
-          |    |    `-- Resource
-          |    |-- hsa29-my-fun-app-wardrobe-backend-cloudmap
-          |    `-- hsa29-my-fun-app-wardrobe-backend-service
-          |         |-- Service
-          |         `-- CloudmapService
-          |              `-- Resource
-          |-- wardrobe-backend-ecs-cloudwatch-stack
-          |    |-- hsa29-my-fun-app-blue4xxErrors
-          |    |    `-- Resource
-          |    `-- green4xxErrors
-          |         `-- Resource
-          |-- wardrobe-backend-ecs-code-deploy-stack
-          |    |-- hsa29-my-fun-app-wardrobe-backend-ecs-codedeploy
-          |    |    `-- Resource
-          |    `-- codeDeployServiceRole
-          |         `-- Resource
-          |-- wardrobe-backend-ecs-code-deploy-groups-stack
-          |    |-- hsa29-my-fun-app-ecs-codedeploy-custom-lambda-role
-          |    |    |-- Resource
-          |    |    `-- DefaultPolicy
-          |    |         `-- Resource
-          |    |-- hsa29-my-fun-app-createDeploymentGroupLambda
-          |    |    |-- Code
-          |    |    |    |-- Stage
-          |    |    |    `-- AssetBucket
-          |    |    |         `-- Notifications
-          |    |    `-- Resource
-          |    |-- AssetParameters
-          |    |    `-- d2afc96a67784738f55fa36aabb3e2fcfc18ddcae4383342d8386a7c5052db84
-          |    |         |-- S3Bucket
-          |    |         |-- S3VersionKey
-          |    |         `-- ArtifactHash
-          |    |-- customEcsDeploymentGroup
-          |    |    `-- Default
-          |    `-- hsa29-my-fun-app-wardrobe-backend-ecs-deployment-group
-          `-- wardrobe-backend-ecs-pipeline-stack
-               |-- hsa29-my-fun-app-repository
-               |    |-- mynewstackmybluegreenecsservicewardrobebackendecspipelinestackhsa29myfunappwardrobebackendcodepipeline2053DEC1EventRule
-               |    |    `-- Resource
-               |    `-- hsa29-my-fun-app-on-commit
-               |         `-- Resource
-               |-- hsa29-my-fun-app-wardrobe-backend-ecr
-               |-- hsa29-my-fun-app-wardrobe-backend-code-build
-               |    |-- Role
-               |    |    |-- Resource
-               |    |    `-- DefaultPolicy
-               |    |         `-- Resource
-               |    `-- Resource
-               |-- hsa29-my-fun-app-wardrobe-backend-code-pipeline
-               |    |-- ArtifactsBucket
-               |    |    |-- Notifications
-               |    |    `-- Resource
-               |    |-- Role
-               |    |    |-- Resource
-               |    |    |-- DefaultPolicy
-               |    |    |    `-- Resource
-               |    |-- Resource
-               |    |-- Source
-               |    |    `-- hsa29-my-fun-app-CodeCommit_Source
-               |    |         `-- CodePipelineActionRole
-               |    |              |-- Resource
-               |    |              `-- DefaultPolicy
-               |    |                   `-- Resource
-               |    |-- EventsRole
-               |    |    |-- Resource
-               |    |    `-- DefaultPolicy
-               |    |         `-- Resource
-               |    |-- Build
-               |    |    `-- hsa29-my-fun-app-CodeBuild_Project
-               |    |         `-- CodePipelineActionRole
-               |    |              |-- Resource
-               |    |              |-- DefaultPolicy
-               |    |              |    `-- Resource
-               |    `-- Deploy
-               |         `-- Deploy
-               |              `-- CodePipelineActionRole
-               |                   |-- Resource
-               |                   |-- DefaultPolicy
-               |                   |    `-- Resource
-               |-- hsa29-my-fun-app-wardrobe-backend-ecsBlueGreenCodeRepo
-               `-- hsa29-my-fun-app-wardrobe-backend-ecsBlueGreenLBDns
-
-</code></pre>
+AWS documentation for best practice Blue/Green deployments
+<div class="highlight"><pre><span></span><code><span class="ow">new</span> <span class="nx">RainmakersEcsDeploymentService</span><span class="p">(</span><span class="k">this</span><span class="p">,</span>
+            <span class="s1">&#39;my-blue-green-ecs-service&#39;</span><span class="p">,</span>
+            <span class="nx">app</span><span class="p">,</span>
+            <span class="nx">WARDROBE_BACKEND_ECS_DEFINITION</span><span class="p">,</span>
+            <span class="nx">env</span><span class="p">,</span>
+            <span class="nx">cluster</span>
+<span class="p">)</span>
+</code></pre></div>
+We can see our construct tree plans to deploy a vast array of different AWS resources.
+<div class="highlight"><pre><span></span><code><span class="nx">construct</span><span class="o">-</span><span class="nx">tree</span>
+<span class="sb">`-- my-new-stack</span>
+<span class="sb">     |-- my-cluster</span>
+<span class="sb">     |    |-- hsa29-my-fun-app-vpc</span>
+<span class="sb">     |    |    |-- PrivateSubnet1</span>
+<span class="sb">     |    |    `</span><span class="o">--</span> <span class="nx">PrivateSubnet2</span>
+     <span class="o">|</span>    <span class="sb">`-- hsa29-my-fun-app-ecs-cluster</span>
+<span class="sb">     |         |-- Resource</span>
+<span class="sb">     |         `</span><span class="o">--</span> <span class="nx">DefaultServiceDiscoveryNamespace</span>
+     <span class="o">|</span>              <span class="sb">`-- Resource</span>
+<span class="sb">     `</span><span class="o">--</span> <span class="nx">my</span><span class="o">-</span><span class="nx">blue</span><span class="o">-</span><span class="nx">green</span><span class="o">-</span><span class="nx">ecs</span><span class="o">-</span><span class="nx">service</span>
+          <span class="o">|--</span> <span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span><span class="o">-</span><span class="nx">ecs</span><span class="o">-</span><span class="nx">loadbalancer</span><span class="o">-</span><span class="nx">stack</span>
+          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">vpc</span>
+          <span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">PrivateSubnet1</span>
+          <span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">PrivateSubnet2</span>
+          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span><span class="o">-</span><span class="nx">security</span><span class="o">-</span><span class="nx">group</span>
+          <span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Resource</span>
+          <span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="kr">from</span> <span class="nx">mynewstackmybluegreenecsservicewardrobebackendecsloadbalancerstackhsa29myfunappwardrobebackendsecuritygroup035AAFD5</span>:<span class="kt">80</span>
+          <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- from mynewstackmybluegreenecsservicewardrobebackendecsloadbalancerstackhsa29myfunappwardrobebackendsecuritygroup035AAFD5:8080</span>
+<span class="sb">          |    |-- hsa29-my-fun-app-wardrobe-backend-alb</span>
+<span class="sb">          |    |    |-- Resource</span>
+<span class="sb">          |    |    |-- hsa29-my-fun-app-wardrobe-backend-albProdListener</span>
+<span class="sb">          |    |    |    `</span><span class="o">--</span> <span class="nx">Resource</span>
+          <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- hsa29-my-fun-app-wardrobe-backend-albTestListener</span>
+<span class="sb">          |    |         `</span><span class="o">--</span> <span class="nx">Resource</span>
+          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span><span class="o">-</span><span class="nx">blueGroup</span>
+          <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- Resource</span>
+<span class="sb">          |    `</span><span class="o">--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span><span class="o">-</span><span class="nx">greenGroup</span>
+          <span class="o">|</span>         <span class="sb">`-- Resource</span>
+<span class="sb">          |-- wardrobe-backend-ecs-service-stack</span>
+<span class="sb">          |    |-- hsa29-my-fun-app-vpc</span>
+<span class="sb">          |    |    |-- PrivateSubnet1</span>
+<span class="sb">          |    |    |-- PrivateSubnet2</span>
+<span class="sb">          |    |-- hsa29-my-fun-app-wardrobe-backend</span>
+<span class="sb">          |    |-- wardrobe-backend-hsa29-ecsTaskRoleForWorkshop</span>
+<span class="sb">          |    |    |-- Resource</span>
+<span class="sb">          |    |    `</span><span class="o">--</span> <span class="nx">DefaultPolicy</span>
+          <span class="o">|</span>    <span class="o">|</span>         <span class="sb">`-- Resource</span>
+<span class="sb">          |    |-- hsa29dummy-task-for-wardrobe-backend</span>
+<span class="sb">          |    |    |-- Resource</span>
+<span class="sb">          |    |    `</span><span class="o">--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">dummy</span><span class="o">-</span><span class="nx">container</span><span class="o">-</span><span class="nx">def</span><span class="o">-</span><span class="k">for</span><span class="o">-</span><span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span>
+          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">dummy</span><span class="o">-</span><span class="nx">container</span><span class="o">-</span><span class="k">for</span><span class="o">-</span><span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span>
+          <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- Resource</span>
+<span class="sb">          |    |-- hsa29-my-fun-app-wardrobe-backend-app-task-def</span>
+<span class="sb">          |    |    |-- Resource</span>
+<span class="sb">          |    |    `</span><span class="o">--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span><span class="o">-</span><span class="nx">container</span>
+          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">demo</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">log</span><span class="o">-</span><span class="nx">group</span>
+          <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- Resource</span>
+<span class="sb">          |    |-- hsa29-my-fun-app-wardrobe-backend-cloudmap</span>
+<span class="sb">          |    `</span><span class="o">--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span><span class="o">-</span><span class="nx">service</span>
+          <span class="o">|</span>         <span class="o">|--</span> <span class="nx">Service</span>
+          <span class="o">|</span>         <span class="sb">`-- CloudmapService</span>
+<span class="sb">          |              `</span><span class="o">--</span> <span class="nx">Resource</span>
+          <span class="o">|--</span> <span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span><span class="o">-</span><span class="nx">ecs</span><span class="o">-</span><span class="nx">cloudwatch</span><span class="o">-</span><span class="nx">stack</span>
+          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">blue4xxErrors</span>
+          <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- Resource</span>
+<span class="sb">          |    `</span><span class="o">--</span> <span class="nx">green4xxErrors</span>
+          <span class="o">|</span>         <span class="sb">`-- Resource</span>
+<span class="sb">          |-- wardrobe-backend-ecs-code-deploy-stack</span>
+<span class="sb">          |    |-- hsa29-my-fun-app-wardrobe-backend-ecs-codedeploy</span>
+<span class="sb">          |    |    `</span><span class="o">--</span> <span class="nx">Resource</span>
+          <span class="o">|</span>    <span class="sb">`-- codeDeployServiceRole</span>
+<span class="sb">          |         `</span><span class="o">--</span> <span class="nx">Resource</span>
+          <span class="o">|--</span> <span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span><span class="o">-</span><span class="nx">ecs</span><span class="o">-</span><span class="nx">code</span><span class="o">-</span><span class="nx">deploy</span><span class="o">-</span><span class="nx">groups</span><span class="o">-</span><span class="nx">stack</span>
+          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">ecs</span><span class="o">-</span><span class="nx">codedeploy</span><span class="o">-</span><span class="nx">custom</span><span class="o">-</span><span class="nx">lambda</span><span class="o">-</span><span class="nx">role</span>
+          <span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Resource</span>
+          <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- DefaultPolicy</span>
+<span class="sb">          |    |         `</span><span class="o">--</span> <span class="nx">Resource</span>
+          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">createDeploymentGroupLambda</span>
+          <span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Code</span>
+          <span class="o">|</span>    <span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Stage</span>
+          <span class="o">|</span>    <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- AssetBucket</span>
+<span class="sb">          |    |    |         `</span><span class="o">--</span> <span class="nx">Notifications</span>
+          <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- Resource</span>
+<span class="sb">          |    |-- AssetParameters</span>
+<span class="sb">          |    |    `</span><span class="o">--</span> <span class="nx">d2afc96a67784738f55fa36aabb3e2fcfc18ddcae4383342d8386a7c5052db84</span>
+          <span class="o">|</span>    <span class="o">|</span>         <span class="o">|--</span> <span class="nx">S3Bucket</span>
+          <span class="o">|</span>    <span class="o">|</span>         <span class="o">|--</span> <span class="nx">S3VersionKey</span>
+          <span class="o">|</span>    <span class="o">|</span>         <span class="sb">`-- ArtifactHash</span>
+<span class="sb">          |    |-- customEcsDeploymentGroup</span>
+<span class="sb">          |    |    `</span><span class="o">--</span> <span class="nx">Default</span>
+          <span class="o">|</span>    <span class="sb">`-- hsa29-my-fun-app-wardrobe-backend-ecs-deployment-group</span>
+<span class="sb">          `</span><span class="o">--</span> <span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span><span class="o">-</span><span class="nx">ecs</span><span class="o">-</span><span class="nx">pipeline</span><span class="o">-</span><span class="nx">stack</span>
+               <span class="o">|--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">repository</span>
+               <span class="o">|</span>    <span class="o">|--</span> <span class="nx">mynewstackmybluegreenecsservicewardrobebackendecspipelinestackhsa29myfunappwardrobebackendcodepipeline2053DEC1EventRule</span>
+               <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- Resource</span>
+<span class="sb">               |    `</span><span class="o">--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">on</span><span class="o">-</span><span class="nx">commit</span>
+               <span class="o">|</span>         <span class="sb">`-- Resource</span>
+<span class="sb">               |-- hsa29-my-fun-app-wardrobe-backend-ecr</span>
+<span class="sb">               |-- hsa29-my-fun-app-wardrobe-backend-code-build</span>
+<span class="sb">               |    |-- Role</span>
+<span class="sb">               |    |    |-- Resource</span>
+<span class="sb">               |    |    `</span><span class="o">--</span> <span class="nx">DefaultPolicy</span>
+               <span class="o">|</span>    <span class="o">|</span>         <span class="sb">`-- Resource</span>
+<span class="sb">               |    `</span><span class="o">--</span> <span class="nx">Resource</span>
+               <span class="o">|--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span><span class="o">-</span><span class="nx">code</span><span class="o">-</span><span class="nx">pipeline</span>
+               <span class="o">|</span>    <span class="o">|--</span> <span class="nx">ArtifactsBucket</span>
+               <span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Notifications</span>
+               <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- Resource</span>
+<span class="sb">               |    |-- Role</span>
+<span class="sb">               |    |    |-- Resource</span>
+<span class="sb">               |    |    |-- DefaultPolicy</span>
+<span class="sb">               |    |    |    `</span><span class="o">--</span> <span class="nx">Resource</span>
+               <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Resource</span>
+               <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Source</span>
+               <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- hsa29-my-fun-app-CodeCommit_Source</span>
+<span class="sb">               |    |         `</span><span class="o">--</span> <span class="nx">CodePipelineActionRole</span>
+               <span class="o">|</span>    <span class="o">|</span>              <span class="o">|--</span> <span class="nx">Resource</span>
+               <span class="o">|</span>    <span class="o">|</span>              <span class="sb">`-- DefaultPolicy</span>
+<span class="sb">               |    |                   `</span><span class="o">--</span> <span class="nx">Resource</span>
+               <span class="o">|</span>    <span class="o">|--</span> <span class="nx">EventsRole</span>
+               <span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Resource</span>
+               <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- DefaultPolicy</span>
+<span class="sb">               |    |         `</span><span class="o">--</span> <span class="nx">Resource</span>
+               <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Build</span>
+               <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- hsa29-my-fun-app-CodeBuild_Project</span>
+<span class="sb">               |    |         `</span><span class="o">--</span> <span class="nx">CodePipelineActionRole</span>
+               <span class="o">|</span>    <span class="o">|</span>              <span class="o">|--</span> <span class="nx">Resource</span>
+               <span class="o">|</span>    <span class="o">|</span>              <span class="o">|--</span> <span class="nx">DefaultPolicy</span>
+               <span class="o">|</span>    <span class="o">|</span>              <span class="o">|</span>    <span class="sb">`-- Resource</span>
+<span class="sb">               |    `</span><span class="o">--</span> <span class="nx">Deploy</span>
+               <span class="o">|</span>         <span class="sb">`-- Deploy</span>
+<span class="sb">               |              `</span><span class="o">--</span> <span class="nx">CodePipelineActionRole</span>
+               <span class="o">|</span>                   <span class="o">|--</span> <span class="nx">Resource</span>
+               <span class="o">|</span>                   <span class="o">|--</span> <span class="nx">DefaultPolicy</span>
+               <span class="o">|</span>                   <span class="o">|</span>    <span class="sb">`-- Resource</span>
+<span class="sb">               |-- hsa29-my-fun-app-wardrobe-backend-ecsBlueGreenCodeRepo</span>
+<span class="sb">               `</span><span class="o">--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span><span class="o">-</span><span class="nx">ecsBlueGreenLBDns</span>
+</code></pre></div></p>
                 
               
               

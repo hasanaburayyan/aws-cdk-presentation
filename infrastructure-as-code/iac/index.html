@@ -40,6 +40,8 @@
     
     
     
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
     
       
 
@@ -380,6 +382,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../../building-reusable-code/building-reusable-code/" class="md-nav__link">
+        Building Reusable Code
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../about/about-me/" class="md-nav__link">
         About The Author
       </a>
@@ -422,7 +439,319 @@
                 
                 
                 <h1 id="infrastructure-as-code">Infrastructure As Code</h1>
-<p>Its cool</p>
+<p>Infrastructure As Code (IaC) gives us a way to manage the provisioning of our infrastructure resources as code. Making our deployment and configuration process of physical and virtual equipment faster and reliably repeatable. Typically there are two types of IaC, declarative (functional) and imperative (procedural). We will discuss the differences in more depth shortly.</p>
+<div class="tabbed-set" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">CloudFormation</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nt">Resources</span><span class="p">:</span>
+    <span class="nt">myTopic</span><span class="p">:</span>
+        <span class="nt">Type</span><span class="p">:</span> <span class="s">&#39;AWS::SNS::Topic&#39;</span>
+        <span class="nt">Properties</span><span class="p">:</span>
+            <span class="nt">TopicName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-cool-topic</span>
+    <span class="nt">myQueue</span><span class="p">:</span>
+        <span class="nt">Type</span><span class="p">:</span> <span class="s">&#39;AWS::SQS::Queue&#39;</span>
+        <span class="nt">Properties</span><span class="p">:</span>
+            <span class="nt">QueueName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">my-cool-queue</span>
+            <span class="nt">UpdateReplacePolicy</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Delete</span>
+            <span class="nt">DeletionPolicy</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Delete</span>
+    <span class="nt">mySnsSubscription</span><span class="p">:</span>
+        <span class="nt">Type</span><span class="p">:</span> <span class="s">&#39;AWS::SNS::Subscription&#39;</span>
+        <span class="nt">Properties</span><span class="p">:</span>
+            <span class="nt">Protocol</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">sqs</span>
+            <span class="nt">TopicArn</span><span class="p">:</span> <span class="kt">!Ref</span> <span class="l l-Scalar l-Scalar-Plain">myTopic</span>
+            <span class="nt">Endpoint</span><span class="p">:</span> <span class="kt">!GetAtt</span> 
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">myQueue</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Arn</span>
+    <span class="nt">mylambdaServiceRole</span><span class="p">:</span>
+        <span class="nt">Type</span><span class="p">:</span> <span class="s">&#39;AWS::IAM::Role&#39;</span>
+        <span class="nt">Properties</span><span class="p">:</span>
+            <span class="nt">AssumeRolePolicyDocument</span><span class="p">:</span>
+                <span class="nt">Statement</span><span class="p">:</span>
+                <span class="p p-Indicator">-</span> <span class="nt">Action</span><span class="p">:</span> <span class="s">&#39;sts:AssumeRole&#39;</span>
+                    <span class="nt">Effect</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Allow</span>
+                    <span class="nt">Principal</span><span class="p">:</span>
+                    <span class="nt">Service</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">lambda.amazonaws.com</span>
+                <span class="nt">Version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2012-10-17</span>
+            <span class="nt">ManagedPolicyArns</span><span class="p">:</span>
+                <span class="p p-Indicator">-</span> <span class="kt">!Join</span> 
+                <span class="p p-Indicator">-</span> <span class="s">&#39;&#39;</span>
+                <span class="p p-Indicator">-</span> <span class="p p-Indicator">-</span> <span class="s">&#39;arn:&#39;</span>
+                    <span class="p p-Indicator">-</span> <span class="kt">!Ref</span> <span class="s">&#39;AWS::Partition&#39;</span>
+                    <span class="p p-Indicator">-</span> <span class="s">&#39;:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole&#39;</span>
+    <span class="nt">mylambdaServiceRoleDefaultPolicy</span><span class="p">:</span>
+        <span class="nt">Type</span><span class="p">:</span> <span class="s">&#39;AWS::IAM::Policy&#39;</span>
+        <span class="nt">Properties</span><span class="p">:</span>
+            <span class="nt">PolicyDocument</span><span class="p">:</span>
+                <span class="nt">Statement</span><span class="p">:</span>
+                <span class="p p-Indicator">-</span> <span class="nt">Action</span><span class="p">:</span>
+                    <span class="p p-Indicator">-</span> <span class="s">&#39;sqs:ReceiveMessage&#39;</span>
+                    <span class="p p-Indicator">-</span> <span class="s">&#39;sqs:ChangeMessageVisibility&#39;</span>
+                    <span class="p p-Indicator">-</span> <span class="s">&#39;sqs:GetQueueUrl&#39;</span>
+                    <span class="p p-Indicator">-</span> <span class="s">&#39;sqs:DeleteMessage&#39;</span>
+                    <span class="p p-Indicator">-</span> <span class="s">&#39;sqs:GetQueueAttributes&#39;</span>
+                    <span class="nt">Effect</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Allow</span>
+                    <span class="nt">Resource</span><span class="p">:</span> <span class="kt">!GetAtt</span> 
+                    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">myQueue</span>
+                    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Arn</span>
+                <span class="nt">Version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2012-10-17</span>
+            <span class="nt">PolicyName</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mylambdaServiceRoleDefaultPolicy</span>
+            <span class="nt">Roles</span><span class="p">:</span>
+                <span class="p p-Indicator">-</span> <span class="kt">!Ref</span> <span class="l l-Scalar l-Scalar-Plain">mylambdaServiceRole</span>
+    <span class="nt">mylambda</span><span class="p">:</span>
+        <span class="nt">Type</span><span class="p">:</span> <span class="s">&#39;AWS::Lambda::Function&#39;</span>
+        <span class="nt">Properties</span><span class="p">:</span>
+            <span class="nt">Code</span><span class="p">:</span>
+                <span class="nt">S3Bucket</span><span class="p">:</span> <span class="kt">!Ref</span> <span class="l l-Scalar l-Scalar-Plain">WHATEVER_BUCKET_YOU_UPLOADED_LAMBDA_TO</span>
+                <span class="nt">S3Key</span><span class="p">:</span> <span class="kt">!Ref</span> <span class="l l-Scalar l-Scalar-Plain">KEY_TO_REFERENCE_LAMBDA</span>
+            <span class="nt">Role</span><span class="p">:</span> <span class="kt">!GetAtt</span> 
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mylambdaServiceRole</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Arn</span>
+            <span class="nt">Environment</span><span class="p">:</span>
+                <span class="nt">Variables</span><span class="p">:</span>
+                <span class="nt">QUEUE_ARN</span><span class="p">:</span> <span class="kt">!GetAtt</span> 
+                    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">myQueue</span>
+                    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Arn</span>
+                <span class="nt">QUEUE_NAME</span><span class="p">:</span> <span class="kt">!GetAtt</span> 
+                    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">myQueue</span>
+                    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">QueueName</span>
+            <span class="nt">Handler</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">empty-queue.handler</span>
+            <span class="nt">Runtime</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">python3.8</span>
+            <span class="nt">DependsOn</span><span class="p">:</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mylambdaServiceRoleDefaultPolicy</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">mylambdaServiceRole</span>
+    <span class="nt">mylambdaSqsEvent</span><span class="p">:</span>
+        <span class="nt">Type</span><span class="p">:</span> <span class="s">&#39;AWS::Lambda::EventSourceMapping&#39;</span>
+        <span class="nt">Properties</span><span class="p">:</span>
+            <span class="nt">FunctionName</span><span class="p">:</span> <span class="kt">!Ref</span> <span class="l l-Scalar l-Scalar-Plain">mylambda</span>
+            <span class="nt">EventSourceArn</span><span class="p">:</span> <span class="kt">!GetAtt</span> 
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">myQueue</span>
+                <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">Arn</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Terraform</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="err">does</span><span class="p">:</span> <span class="err">s</span><span class="kc">tuff</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">CDK</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">path</span> <span class="kr">from</span> <span class="s1">&#39;path&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">lambda</span> <span class="kr">from</span> <span class="s1">&#39;@aws-cdk/aws-lambda&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">lambdaEventSources</span> <span class="kr">from</span> <span class="s1">&#39;@aws-cdk/aws-lambda-event-sources&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">sns</span> <span class="kr">from</span> <span class="s1">&#39;@aws-cdk/aws-sns&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">sqs</span> <span class="kr">from</span> <span class="s1">&#39;@aws-cdk/aws-sqs&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">cdk</span> <span class="kr">from</span> <span class="s1">&#39;@aws-cdk/core&#39;</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">PubSubModel</span> <span class="k">extends</span> <span class="nx">cdk</span><span class="p">.</span><span class="nx">Stack</span> <span class="p">{</span>
+<span class="kr">constructor</span><span class="p">(</span><span class="nx">scope</span>: <span class="kt">cdk.Construct</span><span class="p">,</span> <span class="nx">id</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">props?</span>: <span class="kt">cdk.StackProps</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">props</span><span class="p">);</span>
+
+    <span class="kd">let</span> <span class="nx">myTopic</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">sns</span><span class="p">.</span><span class="nx">Topic</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s1">&#39;my-topic&#39;</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">topicName</span><span class="o">:</span> <span class="s1">&#39;my-cool-topic&#39;</span><span class="p">,</span>
+    <span class="p">});</span>
+
+    <span class="kd">let</span> <span class="nx">myQueue</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">sqs</span><span class="p">.</span><span class="nx">Queue</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s1">&#39;my-sqs-queue&#39;</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">queueName</span><span class="o">:</span> <span class="s1">&#39;my-cool-queue&#39;</span><span class="p">,</span>
+    <span class="p">});</span>
+
+    <span class="ow">new</span> <span class="nx">sns</span><span class="p">.</span><span class="nx">Subscription</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s1">&#39;my-sns-subscription&#39;</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">topic</span>: <span class="kt">myTopic</span><span class="p">,</span>
+        <span class="nx">protocol</span>: <span class="kt">sns.SubscriptionProtocol.SQS</span><span class="p">,</span>
+        <span class="nx">endpoint</span>: <span class="kt">myQueue.queueArn</span><span class="p">,</span>
+    <span class="p">});</span>
+
+    <span class="kd">let</span> <span class="nx">myLambda</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">lambda</span><span class="p">.</span><span class="nb">Function</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s1">&#39;my-lambda&#39;</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">runtime</span>: <span class="kt">lambda.Runtime.PYTHON_3_8</span><span class="p">,</span>
+        <span class="nx">handler</span><span class="o">:</span> <span class="s1">&#39;empty-queue.handler&#39;</span><span class="p">,</span>
+        <span class="nx">code</span>: <span class="kt">lambda.Code.fromAsset</span><span class="p">(</span>
+            <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">&#39;./lambda_scripts&#39;</span><span class="p">),</span>
+            <span class="p">{</span>
+            <span class="nx">exclude</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;**&#39;</span><span class="p">,</span> <span class="s1">&#39;!empty-queue.py&#39;</span><span class="p">],</span>
+            <span class="p">},</span>
+        <span class="p">),</span>
+        <span class="nx">environment</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">QUEUE_ARN</span>: <span class="kt">myQueue.queueArn</span><span class="p">,</span>
+            <span class="nx">QUEUE_NAME</span>: <span class="kt">myQueue.queueName</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">});</span>
+
+    <span class="nx">myQueue</span><span class="p">.</span><span class="nx">grantConsumeMessages</span><span class="p">(</span><span class="nx">myLambda</span><span class="p">);</span>
+    <span class="nx">myLambda</span><span class="p">.</span><span class="nx">addEventSource</span><span class="p">(</span><span class="ow">new</span> <span class="nx">lambdaEventSources</span><span class="p">.</span><span class="nx">SqsEventSource</span><span class="p">(</span><span class="nx">myQueue</span><span class="p">));</span>
+<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+<input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><label for="__tabbed_1_4">Lambda Code</label><div class="tabbed-content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+
+<span class="n">SUCCESS</span> <span class="o">=</span> <span class="s2">&quot;SUCCESS&quot;</span>
+<span class="n">FAILED</span> <span class="o">=</span> <span class="s2">&quot;FAILED&quot;</span>
+<span class="n">QUEUE_ARN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;QUEUE_ARN&#39;</span><span class="p">)</span>
+<span class="n">QUEUE_NAME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;QUEUE_NAME&#39;</span><span class="p">)</span>
+<span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">LOGGER</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+<span class="n">sqs</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;sqs&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+    <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Recieved event: &quot;</span> <span class="o">+</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;Records&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">record</span><span class="p">[</span><span class="s2">&quot;body&quot;</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">payload</span><span class="p">))</span>
+</code></pre></div>
+</td></tr></table>
+</div>
+</div>
                 
               
               

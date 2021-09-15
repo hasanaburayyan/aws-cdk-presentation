@@ -40,6 +40,8 @@
     
     
     
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
     
       
 
@@ -417,6 +419,21 @@
   
   
     <li class="md-nav__item">
+      <a href="../../building-reusable-code/building-reusable-code/" class="md-nav__link">
+        Building Reusable Code
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../about/about-me/" class="md-nav__link">
         About The Author
       </a>
@@ -482,62 +499,59 @@
                 
                 <h1 id="testing-cdk">Testing CDK</h1>
 <h2 id="simple-stack-with-tags">Simple Stack With Tags</h2>
-<pre><code class="language-typescript">import * as cdk from &quot;@aws-cdk/core&quot;;
-import {RemovalPolicy} from &quot;@aws-cdk/core&quot;;
-import * as s3 from &quot;@aws-cdk/aws-s3&quot;;
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">cdk</span> <span class="kr">from</span> <span class="s2">&quot;@aws-cdk/core&quot;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">RemovalPolicy</span><span class="p">}</span> <span class="kr">from</span> <span class="s2">&quot;@aws-cdk/core&quot;</span><span class="p">;</span>
+<span class="k">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">s3</span> <span class="kr">from</span> <span class="s2">&quot;@aws-cdk/aws-s3&quot;</span><span class="p">;</span>
 
-export class SampleStack extends cdk.Stack {
-    constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
-        super(scope, id, props);
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">SampleStack</span> <span class="k">extends</span> <span class="nx">cdk</span><span class="p">.</span><span class="nx">Stack</span> <span class="p">{</span>
+    <span class="kr">constructor</span><span class="p">(</span><span class="nx">scope</span>: <span class="kt">cdk.Construct</span><span class="p">,</span> <span class="nx">id</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">props?</span>: <span class="kt">cdk.StackProps</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">id</span><span class="p">,</span> <span class="nx">props</span><span class="p">);</span>
 
-        let myBucket = new s3.Bucket(this, 'super-cool-bucket', {
-            bucketName: &quot;my-super-cool-bucket&quot;,
-            removalPolicy: RemovalPolicy.DESTROY,
-            publicReadAccess: true
-        });
+        <span class="kd">let</span> <span class="nx">myBucket</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">s3</span><span class="p">.</span><span class="nx">Bucket</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s1">&#39;super-cool-bucket&#39;</span><span class="p">,</span> <span class="p">{</span>
+            <span class="nx">bucketName</span><span class="o">:</span> <span class="s2">&quot;my-super-cool-bucket&quot;</span><span class="p">,</span>
+            <span class="nx">removalPolicy</span>: <span class="kt">RemovalPolicy.DESTROY</span><span class="p">,</span>
+            <span class="nx">publicReadAccess</span>: <span class="kt">true</span>
+        <span class="p">});</span>
 
-        cdk.Tags.of(this).add(&quot;cas:created-by&quot;, &quot;rainmakers&quot;)
-        cdk.Tags.of(this).add(&quot;cas:department-code&quot;, &quot;C12345&quot;)
-        cdk.Tags.of(this).add(&quot;cas:environment-type&quot;, &quot;sandbox&quot;)
-        cdk.Tags.of(this).add(&quot;cas:owner&quot;, &quot;rainmakers@cas.org&quot;)
-    }
-}
-
-</code></pre>
+        <span class="nx">cdk</span><span class="p">.</span><span class="nx">Tags</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;cas:created-by&quot;</span><span class="p">,</span> <span class="s2">&quot;rainmakers&quot;</span><span class="p">)</span>
+        <span class="nx">cdk</span><span class="p">.</span><span class="nx">Tags</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;cas:department-code&quot;</span><span class="p">,</span> <span class="s2">&quot;C12345&quot;</span><span class="p">)</span>
+        <span class="nx">cdk</span><span class="p">.</span><span class="nx">Tags</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;cas:environment-type&quot;</span><span class="p">,</span> <span class="s2">&quot;sandbox&quot;</span><span class="p">)</span>
+        <span class="nx">cdk</span><span class="p">.</span><span class="nx">Tags</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;cas:owner&quot;</span><span class="p">,</span> <span class="s2">&quot;rainmakers@cas.org&quot;</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 <h2 id="testing-the-stack">Testing The Stack</h2>
-<pre><code class="language-typescript">import * as cdk from '@aws-cdk/core';
-import '@aws-cdk/assert/jest';
-import {expect as expectCDK, haveResource, haveResourceLike} from '@aws-cdk/assert';
-import {SampleStack} from &quot;../lib/sample-stack&quot;;
+<div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">cdk</span> <span class="kr">from</span> <span class="s1">&#39;@aws-cdk/core&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="s1">&#39;@aws-cdk/assert/jest&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">expect</span> <span class="kr">as</span> <span class="nx">expectCDK</span><span class="p">,</span> <span class="nx">haveResource</span><span class="p">,</span> <span class="nx">haveResourceLike</span><span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@aws-cdk/assert&#39;</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">SampleStack</span><span class="p">}</span> <span class="kr">from</span> <span class="s2">&quot;../lib/sample-stack&quot;</span><span class="p">;</span>
 
-test('Check Tags', () =&gt; {
-    // GIVEN
-    const app = new cdk.App();
+<span class="nx">test</span><span class="p">(</span><span class="s1">&#39;Check Tags&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// GIVEN</span>
+    <span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">cdk</span><span class="p">.</span><span class="nx">App</span><span class="p">();</span>
 
-    // WHEN
-    const stack: cdk.Stack = new SampleStack(app, 'my-test-stack')
+    <span class="c1">// WHEN</span>
+    <span class="kd">const</span> <span class="nx">stack</span>: <span class="kt">cdk.Stack</span> <span class="o">=</span> <span class="ow">new</span> <span class="nx">SampleStack</span><span class="p">(</span><span class="nx">app</span><span class="p">,</span> <span class="s1">&#39;my-test-stack&#39;</span><span class="p">)</span>
 
-    // THEN
-    expectCDK(stack).to(haveResourceLike(&quot;AWS::S3::Bucket&quot;, {
-        &quot;Tags&quot;: [
-            {
-                &quot;Key&quot;: &quot;cas:created-by&quot;
-            },
-            {
-                &quot;Key&quot;: &quot;cas:department-code&quot;
-            },
-            {
-                &quot;Key&quot;: &quot;cas:environment-type&quot;
-            },
-            {
-                &quot;Key&quot;: &quot;cas:owner&quot;
-            }
-        ]
-    }))
-});
-</code></pre>
-<p><a href="../README.md">Back To Agenda</a></p>
-<p><a href="">Next Topic</a></p>
+    <span class="c1">// THEN</span>
+    <span class="nx">expectCDK</span><span class="p">(</span><span class="nx">stack</span><span class="p">).</span><span class="nx">to</span><span class="p">(</span><span class="nx">haveResourceLike</span><span class="p">(</span><span class="s2">&quot;AWS::S3::Bucket&quot;</span><span class="p">,</span> <span class="p">{</span>
+        <span class="s2">&quot;Tags&quot;</span><span class="o">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;Key&quot;</span><span class="o">:</span> <span class="s2">&quot;cas:created-by&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;Key&quot;</span><span class="o">:</span> <span class="s2">&quot;cas:department-code&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;Key&quot;</span><span class="o">:</span> <span class="s2">&quot;cas:environment-type&quot;</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;Key&quot;</span><span class="o">:</span> <span class="s2">&quot;cas:owner&quot;</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}))</span>
+<span class="p">});</span>
+</code></pre></div>
                 
               
               
@@ -573,13 +587,13 @@ test('Check Tags', () =&gt; {
       
       
         
-        <a href="../../about/about-me/" class="md-footer__link md-footer__link--next" aria-label="Next: About The Author" rel="next">
+        <a href="../../building-reusable-code/building-reusable-code/" class="md-footer__link md-footer__link--next" aria-label="Next: Building Reusable Code" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              About The Author
+              Building Reusable Code
             </div>
           </div>
           <div class="md-footer__button md-icon">
