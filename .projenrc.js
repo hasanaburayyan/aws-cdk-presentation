@@ -5,6 +5,10 @@ const project = new AwsCdkTypeScriptApp({
   name: 'aws-cdk-presentation',
   cdkDependencies: [
     '@aws-cdk/core',
+    '@aws-cdk/aws-sns',
+    '@aws-cdk/aws-sqs',
+    '@aws-cdk/aws-lambda',
+    '@aws-cdk/aws-lambda-event-sources',
   ],
   // deps: [],                          /* Runtime dependencies of this module. */
   // description: undefined,            /* The description is just a string that helps people understand the purpose of the package. */

@@ -27,7 +27,3 @@ A CDK for project creation. Gives us well defined APIs and Object Oriented Princ
 ![inheritence](assets/project-inheritence.png)
 
 ![dist](assets/dist.png)
-
-[Back To Agenda](../README.md)
-
-[Next Topic]()

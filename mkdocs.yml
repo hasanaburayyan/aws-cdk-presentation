@@ -14,5 +14,18 @@ nav:
   - 'cdk-key-concepts/aspects.md'
   - 'creating-a-construct/custom-construct.md'
   - 'creating-a-construct/testing-cdk.md'
+  - 'building-reusable-code/building-reusable-code.md'
   - 'about/about-me.md'
 theme: material
+extra_css:
+  - stylesheets/extra.css
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.tabbed
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - admonition
+  - attr_list

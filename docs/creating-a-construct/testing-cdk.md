@@ -58,8 +58,3 @@ test('Check Tags', () => {
     }))
 });
 ```
-
-
-[Back To Agenda](../README.md)
-
-[Next Topic]()

@@ -80,8 +80,3 @@ Some other advantages consist of:
 - Creating a reusable and sharable infrastructure library
 - Testing infrastructure before we ever deploy
 - IDE Intelli-sense support
-
-
-[Back To Agenda](../README.md)
-
-[Next Topic](../reference-application/README.md)

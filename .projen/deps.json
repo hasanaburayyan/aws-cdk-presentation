@@ -79,6 +79,26 @@
       "type": "runtime"
     },
     {
+      "name": "@aws-cdk/aws-lambda-event-sources",
+      "version": "^1.22.0",
+      "type": "runtime"
+    },
+    {
+      "name": "@aws-cdk/aws-lambda",
+      "version": "^1.22.0",
+      "type": "runtime"
+    },
+    {
+      "name": "@aws-cdk/aws-sns",
+      "version": "^1.22.0",
+      "type": "runtime"
+    },
+    {
+      "name": "@aws-cdk/aws-sqs",
+      "version": "^1.22.0",
+      "type": "runtime"
+    },
+    {
       "name": "@aws-cdk/core",
       "version": "^1.22.0",
       "type": "runtime"
