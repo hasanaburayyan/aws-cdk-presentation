@@ -1,8 +1,8 @@
 import * as codebuild from '@aws-cdk/aws-codebuild';
 import * as codecommit from '@aws-cdk/aws-codecommit';
 import * as s3 from '@aws-cdk/aws-s3';
-import * as iam from '@aws-cdk/aws-iam';
 import * as cdk from '@aws-cdk/core';
+import { MyFirstAspect } from '../in_case_demo_emergency/solutions/my-first-aspect';
 
 export class MyFirstStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -20,13 +20,6 @@ export class MyFirstStack extends cdk.Stack {
 
     let codeBuildProject = new codebuild.Project(this, 'my-code-build-project', {
       source: codebuild.Source.codeCommit({ repository: myRepo }),
-      role: new iam.Role(this, 'build-role', {
-        roleName: 'cas-my-build-role',
-        permissionsBoundary: iam.ManagedPolicy.fromManagedPolicyName(this,
-          'permission-boundary',
-          'cas-infrastructure/permission-boundary-policy'),
-        assumedBy: new iam.ServicePrincipal('codebuild.amazonaws.com'),
-      }),
       environment: {
         buildImage: codebuild.LinuxBuildImage.STANDARD_5_0,
         environmentVariables: {
@@ -39,5 +32,7 @@ export class MyFirstStack extends cdk.Stack {
     });
 
     myBucket.grantReadWrite(codeBuildProject);
+    // const permissionBoundaryArn: string = iam.ManagedPolicy.fromManagedPolicyName(this, 'permission-boundary', 'cas-infrastructure/cas-permissions-boundary').managedPolicyArn;
+    cdk.Aspects.of(this).add(new MyFirstAspect('arn:aws:iam::893236348299:policy/cas-infrastructure/permission-boundary-policy'));
   }
 }

@@ -35,6 +35,12 @@ Building and deploying cloud infrastructure can be a little over whelming, ensur
 
 ----------
 
+### Additional Resources
+
+<a href ="https://soundcloud.com/awsdevelopers/episode-004-cloud-development-kit-with-elad-ben-israel">Cloud Development Kit With Elad Ben-Israel part 1</a>
+
+<a href ="https://soundcloud.com/awsdevelopers/episode-005-future-of-cloud-development-kit-with-elad-ben-israel">Cloud Development Kit With Elad Ben-Israel part 2</a>
+
 #### Authored By
 
 Name: Hasan Abu-Rayyan
