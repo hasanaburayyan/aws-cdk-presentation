@@ -4,9 +4,13 @@ phases:
   install:
     commands:
       - echo Installing Project!!
+      - pip install mkdocs
+      - pip install mkdocs-material
   build:
     commands:
       - echo Building Project!!
+      - mkdocs build
   post_build:
     commands:
       - echo PostBuilding Project!!
+      - cd docs/site && aws s3 sync s3://$BUCKET_NAME .
