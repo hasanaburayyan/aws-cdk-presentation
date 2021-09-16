@@ -18,7 +18,7 @@ export class MyFirstStack extends cdk.Stack {
       removalPolicy: cdk.RemovalPolicy.DESTROY,
     });
 
-    new codebuild.Project(this, 'my-code-build-project', {
+    let codeBuildProject = new codebuild.Project(this, 'my-code-build-project', {
       source: codebuild.Source.codeCommit({ repository: myRepo }),
       role: new iam.Role(this, 'build-role', {
         roleName: 'cas-my-build-role',
@@ -37,5 +37,7 @@ export class MyFirstStack extends cdk.Stack {
         },
       },
     });
+
+    myBucket.grantReadWrite(codeBuildProject);
   }
 }

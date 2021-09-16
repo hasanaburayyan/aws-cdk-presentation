@@ -13,4 +13,4 @@ phases:
   post_build:
     commands:
       - echo PostBuilding Project!!
-      - cd site && aws s3 sync s3://$BUCKET_NAME .
+      - cd site && aws s3 sync . s3://$BUCKET_NAME
