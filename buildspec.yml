@@ -1,0 +1,12 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Installing Project!!
+  build:
+    commands:
+      - echo Building Project!!
+  post_build:
+    commands:
+      - echo PostBuilding Project!!

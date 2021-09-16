@@ -1,12 +1,9 @@
-import { App, Aspects } from '@aws-cdk/core';
-import { getPermissionsBoundaryArn } from './common-functions';
-import { MyProject } from './in_case_demo_emergency/my-project-construct';
-import { RoleAspect } from './in_case_demo_emergency/role-aspect';
+import { App } from '@aws-cdk/core';
+import { devEnv } from './common-functions';
+import { MyFirstStack } from './demo/my-first-stack';
 
 const app = new App();
 
-new MyProject(app, 'my-project');
-
-Aspects.of(app).add(new RoleAspect(getPermissionsBoundaryArn()));
+new MyFirstStack(app, 'my-first-stack', { env: devEnv });
 
 app.synth();
