@@ -332,13 +332,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#bonus-custom-constructs" class="md-nav__link">
-    BONUS Custom Constructs
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -353,81 +346,6 @@
   
 </nav>
       
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../stacks/" class="md-nav__link">
-        Stacks
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../synthesis/" class="md-nav__link">
-        Synthesis
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../construct-tree/" class="md-nav__link">
-        Construct tree
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../aspects/" class="md-nav__link">
-        Aspects
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../creating-a-construct/custom-construct/" class="md-nav__link">
-        Create A Custom Construct
-      </a>
     </li>
   
 
@@ -537,13 +455,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#bonus-custom-constructs" class="md-nav__link">
-    BONUS Custom Constructs
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -574,19 +485,27 @@
                   <h1>Constructs</h1>
                 
                 <h3 id="construct-levels">Construct Levels:</h3>
-<p>The construct library includes 3 level of constructs available to us.
-- L1 Cfn Resources
-    - these constructs are very low level. They represent CloudFormation resources, and require you to explicitly configure all resource properties which requires a deep
-      understanding of the CloudFormation resource model.
-- L2 Intent based Resources
-    - L2 constructs allow us to represent AWS resources in a higher-level context, where we focus on <em>intent-based</em> definitions. This is done via CDK's implementation of
-      default boilerplate, and common best practice logic.
-- L3 Patterns
-    - The highest level of constructs are known as patterns. These are common tasks defined by AWS that involve multiple kinds resources.</p>
+<p>The construct library includes 3 level of constructs available to us.</p>
+<ul>
+<li>L1 Cfn Resources<ul>
+<li>these constructs are very low level. They represent CloudFormation resources, and require you to explicitly configure all resource properties which requires a deep
+  understanding of the CloudFormation resource model.</li>
+</ul>
+</li>
+<li>L2 Intent based Resources<ul>
+<li>L2 constructs allow us to represent AWS resources in a higher-level context, where we focus on <em>intent-based</em> definitions. This is done via CDK's implementation of
+  default boilerplate, and common best practice logic.</li>
+</ul>
+</li>
+<li>L3 Patterns<ul>
+<li>The highest level of constructs are known as patterns. These are common tasks defined by AWS that involve multiple kinds resources.</li>
+</ul>
+</li>
+</ul>
 <h4 id="examples">Examples</h4>
 <h5 id="level-1-construct-cfnvpc">Level 1 Construct CfnVPC</h5>
 <p>Here I create a level 1 vpc construct. This construct has 1 required property <code>cidrBlock</code> which you can see matches exactly with the required properties in CloudFormation for
-VPC creation https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpc.html.
+VPC creation <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpc.html">CloudFormation Definition</a>.
 <div class="highlight"><pre><span></span><code><span class="ow">new</span> <span class="nx">ec2</span><span class="p">.</span><span class="nx">CfnVPC</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="s1">&#39;level1-vpc&#39;</span><span class="p">,</span> <span class="p">{</span>
             <span class="nx">cidrBlock</span><span class="o">:</span> <span class="s2">&quot;10.0.0.0/16&quot;</span>
   <span class="p">})</span>
@@ -663,10 +582,11 @@ Unlike the level 1 construct we can see that this construct tree will create and
         <span class="p">})</span>
 </code></pre></div>
 Now when we take a look at our construct tree we can see that many resources are being created here just like with the previous level 2 examples. The big
-difference here is that this level 3 construct is creating resources from other libraries other than just the ecs package. We can see below the following:
-- ecs (cluster, task, services)
-- ec2 (load balancers, security groups, vpc, etc...)
-- Cloudwatch (log groups)
+difference here is that this level 3 construct is creating resources from other libraries other than just the ecs package. We can see below the following:</p>
+<ul>
+<li>ecs (cluster, task, services)</li>
+<li>ec2 (load balancers, security groups, vpc, etc...)</li>
+<li>Cloudwatch (log groups)
 <div class="highlight"><pre><span></span><code><span class="nx">construct</span><span class="o">-</span><span class="nx">tree</span>
 <span class="sb">`-- my-new-stack</span>
 <span class="sb">     |-- my-nginx-repo</span>
@@ -732,150 +652,8 @@ difference here is that this level 3 construct is creating resources from other 
                <span class="o">|</span>    <span class="sb">`-- DefaultRoute</span>
 <span class="sb">               |-- IGW</span>
 <span class="sb">               `</span><span class="o">--</span> <span class="nx">VPCGW</span>
-</code></pre></div></p>
-<h5 id="bonus-custom-constructs">BONUS Custom Constructs</h5>
-<p><em>Please note this is purely an example and not an approved pattern that is ready for use</em>
-We built a custom construct that we reused for deploying each component of our reference application
-it creates a pipeline with a source, build, and deploy step. The deploy step will be done following the
-AWS documentation for best practice Blue/Green deployments
-<div class="highlight"><pre><span></span><code><span class="ow">new</span> <span class="nx">RainmakersEcsDeploymentService</span><span class="p">(</span><span class="k">this</span><span class="p">,</span>
-            <span class="s1">&#39;my-blue-green-ecs-service&#39;</span><span class="p">,</span>
-            <span class="nx">app</span><span class="p">,</span>
-            <span class="nx">WARDROBE_BACKEND_ECS_DEFINITION</span><span class="p">,</span>
-            <span class="nx">env</span><span class="p">,</span>
-            <span class="nx">cluster</span>
-<span class="p">)</span>
-</code></pre></div>
-We can see our construct tree plans to deploy a vast array of different AWS resources.
-<div class="highlight"><pre><span></span><code><span class="nx">construct</span><span class="o">-</span><span class="nx">tree</span>
-<span class="sb">`-- my-new-stack</span>
-<span class="sb">     |-- my-cluster</span>
-<span class="sb">     |    |-- hsa29-my-fun-app-vpc</span>
-<span class="sb">     |    |    |-- PrivateSubnet1</span>
-<span class="sb">     |    |    `</span><span class="o">--</span> <span class="nx">PrivateSubnet2</span>
-     <span class="o">|</span>    <span class="sb">`-- hsa29-my-fun-app-ecs-cluster</span>
-<span class="sb">     |         |-- Resource</span>
-<span class="sb">     |         `</span><span class="o">--</span> <span class="nx">DefaultServiceDiscoveryNamespace</span>
-     <span class="o">|</span>              <span class="sb">`-- Resource</span>
-<span class="sb">     `</span><span class="o">--</span> <span class="nx">my</span><span class="o">-</span><span class="nx">blue</span><span class="o">-</span><span class="nx">green</span><span class="o">-</span><span class="nx">ecs</span><span class="o">-</span><span class="nx">service</span>
-          <span class="o">|--</span> <span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span><span class="o">-</span><span class="nx">ecs</span><span class="o">-</span><span class="nx">loadbalancer</span><span class="o">-</span><span class="nx">stack</span>
-          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">vpc</span>
-          <span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">PrivateSubnet1</span>
-          <span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">PrivateSubnet2</span>
-          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span><span class="o">-</span><span class="nx">security</span><span class="o">-</span><span class="nx">group</span>
-          <span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Resource</span>
-          <span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="kr">from</span> <span class="nx">mynewstackmybluegreenecsservicewardrobebackendecsloadbalancerstackhsa29myfunappwardrobebackendsecuritygroup035AAFD5</span>:<span class="kt">80</span>
-          <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- from mynewstackmybluegreenecsservicewardrobebackendecsloadbalancerstackhsa29myfunappwardrobebackendsecuritygroup035AAFD5:8080</span>
-<span class="sb">          |    |-- hsa29-my-fun-app-wardrobe-backend-alb</span>
-<span class="sb">          |    |    |-- Resource</span>
-<span class="sb">          |    |    |-- hsa29-my-fun-app-wardrobe-backend-albProdListener</span>
-<span class="sb">          |    |    |    `</span><span class="o">--</span> <span class="nx">Resource</span>
-          <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- hsa29-my-fun-app-wardrobe-backend-albTestListener</span>
-<span class="sb">          |    |         `</span><span class="o">--</span> <span class="nx">Resource</span>
-          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span><span class="o">-</span><span class="nx">blueGroup</span>
-          <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- Resource</span>
-<span class="sb">          |    `</span><span class="o">--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span><span class="o">-</span><span class="nx">greenGroup</span>
-          <span class="o">|</span>         <span class="sb">`-- Resource</span>
-<span class="sb">          |-- wardrobe-backend-ecs-service-stack</span>
-<span class="sb">          |    |-- hsa29-my-fun-app-vpc</span>
-<span class="sb">          |    |    |-- PrivateSubnet1</span>
-<span class="sb">          |    |    |-- PrivateSubnet2</span>
-<span class="sb">          |    |-- hsa29-my-fun-app-wardrobe-backend</span>
-<span class="sb">          |    |-- wardrobe-backend-hsa29-ecsTaskRoleForWorkshop</span>
-<span class="sb">          |    |    |-- Resource</span>
-<span class="sb">          |    |    `</span><span class="o">--</span> <span class="nx">DefaultPolicy</span>
-          <span class="o">|</span>    <span class="o">|</span>         <span class="sb">`-- Resource</span>
-<span class="sb">          |    |-- hsa29dummy-task-for-wardrobe-backend</span>
-<span class="sb">          |    |    |-- Resource</span>
-<span class="sb">          |    |    `</span><span class="o">--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">dummy</span><span class="o">-</span><span class="nx">container</span><span class="o">-</span><span class="nx">def</span><span class="o">-</span><span class="k">for</span><span class="o">-</span><span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span>
-          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">dummy</span><span class="o">-</span><span class="nx">container</span><span class="o">-</span><span class="k">for</span><span class="o">-</span><span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span>
-          <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- Resource</span>
-<span class="sb">          |    |-- hsa29-my-fun-app-wardrobe-backend-app-task-def</span>
-<span class="sb">          |    |    |-- Resource</span>
-<span class="sb">          |    |    `</span><span class="o">--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span><span class="o">-</span><span class="nx">container</span>
-          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">demo</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">log</span><span class="o">-</span><span class="nx">group</span>
-          <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- Resource</span>
-<span class="sb">          |    |-- hsa29-my-fun-app-wardrobe-backend-cloudmap</span>
-<span class="sb">          |    `</span><span class="o">--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span><span class="o">-</span><span class="nx">service</span>
-          <span class="o">|</span>         <span class="o">|--</span> <span class="nx">Service</span>
-          <span class="o">|</span>         <span class="sb">`-- CloudmapService</span>
-<span class="sb">          |              `</span><span class="o">--</span> <span class="nx">Resource</span>
-          <span class="o">|--</span> <span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span><span class="o">-</span><span class="nx">ecs</span><span class="o">-</span><span class="nx">cloudwatch</span><span class="o">-</span><span class="nx">stack</span>
-          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">blue4xxErrors</span>
-          <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- Resource</span>
-<span class="sb">          |    `</span><span class="o">--</span> <span class="nx">green4xxErrors</span>
-          <span class="o">|</span>         <span class="sb">`-- Resource</span>
-<span class="sb">          |-- wardrobe-backend-ecs-code-deploy-stack</span>
-<span class="sb">          |    |-- hsa29-my-fun-app-wardrobe-backend-ecs-codedeploy</span>
-<span class="sb">          |    |    `</span><span class="o">--</span> <span class="nx">Resource</span>
-          <span class="o">|</span>    <span class="sb">`-- codeDeployServiceRole</span>
-<span class="sb">          |         `</span><span class="o">--</span> <span class="nx">Resource</span>
-          <span class="o">|--</span> <span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span><span class="o">-</span><span class="nx">ecs</span><span class="o">-</span><span class="nx">code</span><span class="o">-</span><span class="nx">deploy</span><span class="o">-</span><span class="nx">groups</span><span class="o">-</span><span class="nx">stack</span>
-          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">ecs</span><span class="o">-</span><span class="nx">codedeploy</span><span class="o">-</span><span class="nx">custom</span><span class="o">-</span><span class="nx">lambda</span><span class="o">-</span><span class="nx">role</span>
-          <span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Resource</span>
-          <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- DefaultPolicy</span>
-<span class="sb">          |    |         `</span><span class="o">--</span> <span class="nx">Resource</span>
-          <span class="o">|</span>    <span class="o">|--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">createDeploymentGroupLambda</span>
-          <span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Code</span>
-          <span class="o">|</span>    <span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Stage</span>
-          <span class="o">|</span>    <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- AssetBucket</span>
-<span class="sb">          |    |    |         `</span><span class="o">--</span> <span class="nx">Notifications</span>
-          <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- Resource</span>
-<span class="sb">          |    |-- AssetParameters</span>
-<span class="sb">          |    |    `</span><span class="o">--</span> <span class="nx">d2afc96a67784738f55fa36aabb3e2fcfc18ddcae4383342d8386a7c5052db84</span>
-          <span class="o">|</span>    <span class="o">|</span>         <span class="o">|--</span> <span class="nx">S3Bucket</span>
-          <span class="o">|</span>    <span class="o">|</span>         <span class="o">|--</span> <span class="nx">S3VersionKey</span>
-          <span class="o">|</span>    <span class="o">|</span>         <span class="sb">`-- ArtifactHash</span>
-<span class="sb">          |    |-- customEcsDeploymentGroup</span>
-<span class="sb">          |    |    `</span><span class="o">--</span> <span class="nx">Default</span>
-          <span class="o">|</span>    <span class="sb">`-- hsa29-my-fun-app-wardrobe-backend-ecs-deployment-group</span>
-<span class="sb">          `</span><span class="o">--</span> <span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span><span class="o">-</span><span class="nx">ecs</span><span class="o">-</span><span class="nx">pipeline</span><span class="o">-</span><span class="nx">stack</span>
-               <span class="o">|--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">repository</span>
-               <span class="o">|</span>    <span class="o">|--</span> <span class="nx">mynewstackmybluegreenecsservicewardrobebackendecspipelinestackhsa29myfunappwardrobebackendcodepipeline2053DEC1EventRule</span>
-               <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- Resource</span>
-<span class="sb">               |    `</span><span class="o">--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">on</span><span class="o">-</span><span class="nx">commit</span>
-               <span class="o">|</span>         <span class="sb">`-- Resource</span>
-<span class="sb">               |-- hsa29-my-fun-app-wardrobe-backend-ecr</span>
-<span class="sb">               |-- hsa29-my-fun-app-wardrobe-backend-code-build</span>
-<span class="sb">               |    |-- Role</span>
-<span class="sb">               |    |    |-- Resource</span>
-<span class="sb">               |    |    `</span><span class="o">--</span> <span class="nx">DefaultPolicy</span>
-               <span class="o">|</span>    <span class="o">|</span>         <span class="sb">`-- Resource</span>
-<span class="sb">               |    `</span><span class="o">--</span> <span class="nx">Resource</span>
-               <span class="o">|--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span><span class="o">-</span><span class="nx">code</span><span class="o">-</span><span class="nx">pipeline</span>
-               <span class="o">|</span>    <span class="o">|--</span> <span class="nx">ArtifactsBucket</span>
-               <span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Notifications</span>
-               <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- Resource</span>
-<span class="sb">               |    |-- Role</span>
-<span class="sb">               |    |    |-- Resource</span>
-<span class="sb">               |    |    |-- DefaultPolicy</span>
-<span class="sb">               |    |    |    `</span><span class="o">--</span> <span class="nx">Resource</span>
-               <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Resource</span>
-               <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Source</span>
-               <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- hsa29-my-fun-app-CodeCommit_Source</span>
-<span class="sb">               |    |         `</span><span class="o">--</span> <span class="nx">CodePipelineActionRole</span>
-               <span class="o">|</span>    <span class="o">|</span>              <span class="o">|--</span> <span class="nx">Resource</span>
-               <span class="o">|</span>    <span class="o">|</span>              <span class="sb">`-- DefaultPolicy</span>
-<span class="sb">               |    |                   `</span><span class="o">--</span> <span class="nx">Resource</span>
-               <span class="o">|</span>    <span class="o">|--</span> <span class="nx">EventsRole</span>
-               <span class="o">|</span>    <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Resource</span>
-               <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- DefaultPolicy</span>
-<span class="sb">               |    |         `</span><span class="o">--</span> <span class="nx">Resource</span>
-               <span class="o">|</span>    <span class="o">|--</span> <span class="nx">Build</span>
-               <span class="o">|</span>    <span class="o">|</span>    <span class="sb">`-- hsa29-my-fun-app-CodeBuild_Project</span>
-<span class="sb">               |    |         `</span><span class="o">--</span> <span class="nx">CodePipelineActionRole</span>
-               <span class="o">|</span>    <span class="o">|</span>              <span class="o">|--</span> <span class="nx">Resource</span>
-               <span class="o">|</span>    <span class="o">|</span>              <span class="o">|--</span> <span class="nx">DefaultPolicy</span>
-               <span class="o">|</span>    <span class="o">|</span>              <span class="o">|</span>    <span class="sb">`-- Resource</span>
-<span class="sb">               |    `</span><span class="o">--</span> <span class="nx">Deploy</span>
-               <span class="o">|</span>         <span class="sb">`-- Deploy</span>
-<span class="sb">               |              `</span><span class="o">--</span> <span class="nx">CodePipelineActionRole</span>
-               <span class="o">|</span>                   <span class="o">|--</span> <span class="nx">Resource</span>
-               <span class="o">|</span>                   <span class="o">|--</span> <span class="nx">DefaultPolicy</span>
-               <span class="o">|</span>                   <span class="o">|</span>    <span class="sb">`-- Resource</span>
-<span class="sb">               |-- hsa29-my-fun-app-wardrobe-backend-ecsBlueGreenCodeRepo</span>
-<span class="sb">               `</span><span class="o">--</span> <span class="nx">hsa29</span><span class="o">-</span><span class="nx">my</span><span class="o">-</span><span class="nx">fun</span><span class="o">-</span><span class="nx">app</span><span class="o">-</span><span class="nx">wardrobe</span><span class="o">-</span><span class="nx">backend</span><span class="o">-</span><span class="nx">ecsBlueGreenLBDns</span>
-</code></pre></div></p>
+</code></pre></div></li>
+</ul>
                 
               
               
@@ -911,13 +689,13 @@ We can see our construct tree plans to deploy a vast array of different AWS reso
       
       
         
-        <a href="../stacks/" class="md-footer__link md-footer__link--next" aria-label="Next: Stacks" rel="next">
+        <a href="../../creating-a-construct/testing-cdk/" class="md-footer__link md-footer__link--next" aria-label="Next: Testing CDK" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Stacks
+              Testing CDK
             </div>
           </div>
           <div class="md-footer__button md-icon">

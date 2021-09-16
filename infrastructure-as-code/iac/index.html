@@ -231,9 +231,39 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Infrastructure As Code
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         Infrastructure As Code
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basic-pub-sub-model" class="md-nav__link">
+    Basic Pub Sub Model
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -279,81 +309,6 @@
     <li class="md-nav__item">
       <a href="../../cdk-key-concepts/constructs/" class="md-nav__link">
         Constructs
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cdk-key-concepts/stacks/" class="md-nav__link">
-        Stacks
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cdk-key-concepts/synthesis/" class="md-nav__link">
-        Synthesis
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cdk-key-concepts/construct-tree/" class="md-nav__link">
-        Construct tree
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cdk-key-concepts/aspects/" class="md-nav__link">
-        Aspects
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../creating-a-construct/custom-construct/" class="md-nav__link">
-        Create A Custom Construct
       </a>
     </li>
   
@@ -423,6 +378,21 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basic-pub-sub-model" class="md-nav__link">
+    Basic Pub Sub Model
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -440,6 +410,8 @@
                 
                 <h1 id="infrastructure-as-code">Infrastructure As Code</h1>
 <p>Infrastructure As Code (IaC) gives us a way to manage the provisioning of our infrastructure resources as code. Making our deployment and configuration process of physical and virtual equipment faster and reliably repeatable. Typically there are two types of IaC, declarative (functional) and imperative (procedural). We will discuss the differences in more depth shortly.</p>
+<h2 id="basic-pub-sub-model">Basic Pub Sub Model</h2>
+<p><img src="../../assets/pub-sub.png"></p>
 <div class="tabbed-set" data-tabs="1:4"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">CloudFormation</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
@@ -610,10 +582,133 @@
 </td></tr></table>
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Terraform</label><div class="tabbed-content">
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-    <span class="err">does</span><span class="p">:</span> <span class="err">s</span><span class="kc">tuff</span>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="kc">terraf</span><span class="err">orm</span> <span class="p">{</span>
+    <span class="err">required_providers</span> <span class="p">{</span>
+        <span class="err">aws</span> <span class="err">=</span> <span class="p">{</span>
+        <span class="err">source</span> <span class="err">=</span> <span class="s2">&quot;hashicorp/aws&quot;</span>
+        <span class="err">versio</span><span class="kc">n</span> <span class="err">=</span> <span class="s2">&quot;3.58.0&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="err">provider</span> <span class="s2">&quot;aws&quot;</span> <span class="p">{</span>
+    <span class="err">regio</span><span class="kc">n</span> <span class="err">=</span> <span class="s2">&quot;us-east-2&quot;</span>
+<span class="p">}</span>
+
+<span class="err">resource</span> <span class="s2">&quot;aws_sns_topic&quot;</span> <span class="s2">&quot;user_updates&quot;</span> <span class="p">{</span>
+    <span class="kc">na</span><span class="err">me</span> <span class="err">=</span> <span class="s2">&quot;user-updates-topic&quot;</span>
+<span class="p">}</span>
+
+<span class="err">resource</span> <span class="s2">&quot;aws_sqs_queue&quot;</span> <span class="s2">&quot;terraform_queue&quot;</span> <span class="p">{</span>
+    <span class="kc">na</span><span class="err">me</span>                      <span class="err">=</span> <span class="s2">&quot;terraform-example-queue&quot;</span>
+<span class="p">}</span>
+
+<span class="err">resource</span> <span class="s2">&quot;aws_sns_topic_subscription&quot;</span> <span class="s2">&quot;user_updates_sqs_target&quot;</span> <span class="p">{</span>
+    <span class="kc">t</span><span class="err">opic_ar</span><span class="kc">n</span> <span class="err">=</span> <span class="s2">&quot;arn:aws:sns:us-west-2:432981146916:user-updates-topic&quot;</span>
+    <span class="err">pro</span><span class="kc">t</span><span class="err">ocol</span>  <span class="err">=</span> <span class="s2">&quot;sqs&quot;</span>
+    <span class="err">e</span><span class="kc">n</span><span class="err">dpoi</span><span class="kc">nt</span>  <span class="err">=</span> <span class="s2">&quot;arn:aws:sqs:us-west-2:432981146916:terraform-queue-too&quot;</span>
+<span class="p">}</span>
+
+<span class="err">resource</span> <span class="s2">&quot;aws_iam_role&quot;</span> <span class="s2">&quot;iam_for_lambda&quot;</span> <span class="p">{</span>
+    <span class="kc">na</span><span class="err">me</span> <span class="err">=</span> <span class="s2">&quot;iam_for_lambda&quot;</span>
+
+    <span class="err">assume_role_policy</span> <span class="err">=</span> <span class="err">&lt;&lt;EOF</span>
+    <span class="p">{</span>
+    <span class="nt">&quot;Version&quot;</span><span class="p">:</span> <span class="s2">&quot;2012-10-17&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;Statement&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+        <span class="nt">&quot;Action&quot;</span><span class="p">:</span> <span class="s2">&quot;sts:AssumeRole&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Principal&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&quot;Service&quot;</span><span class="p">:</span> <span class="s2">&quot;lambda.amazonaws.com&quot;</span>
+        <span class="p">},</span>
+        <span class="nt">&quot;Effect&quot;</span><span class="p">:</span> <span class="s2">&quot;Allow&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Sid&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="err">EOF</span>
+<span class="p">}</span>
+
+<span class="err">resource</span> <span class="s2">&quot;aws_lambda_function&quot;</span> <span class="s2">&quot;test_lambda&quot;</span> <span class="p">{</span>
+    <span class="kc">f</span><span class="err">ile</span><span class="kc">na</span><span class="err">me</span>      <span class="err">=</span> <span class="s2">&quot;empty-queue.py&quot;</span>
+    <span class="kc">fun</span><span class="err">c</span><span class="kc">t</span><span class="err">io</span><span class="kc">n</span><span class="err">_</span><span class="kc">na</span><span class="err">me</span> <span class="err">=</span> <span class="s2">&quot;handler&quot;</span>
+    <span class="err">role</span>          <span class="err">=</span> <span class="err">aws_iam_role.iam_</span><span class="kc">f</span><span class="err">or_lambda.ar</span><span class="kc">n</span>
+    <span class="err">ha</span><span class="kc">n</span><span class="err">dler</span>       <span class="err">=</span> <span class="s2">&quot;empty-queue.handler&quot;</span>
+
+    <span class="err">source_code_hash</span> <span class="err">=</span> <span class="kc">f</span><span class="err">ilebase</span><span class="mi">64</span><span class="err">sha</span><span class="mi">256</span><span class="err">(</span><span class="s2">&quot;lambda_function_payload.zip&quot;</span><span class="err">)</span>
+
+    <span class="err">ru</span><span class="kc">nt</span><span class="err">ime</span> <span class="err">=</span> <span class="s2">&quot;nodejs12.x&quot;</span>
+
+    <span class="err">e</span><span class="kc">n</span><span class="err">viro</span><span class="kc">n</span><span class="err">me</span><span class="kc">nt</span> <span class="p">{</span>
+            <span class="err">variables</span> <span class="err">=</span> <span class="p">{</span>
+            <span class="kc">f</span><span class="err">oo</span> <span class="err">=</span> <span class="s2">&quot;bar&quot;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
+</td></tr></table>
 </div>
 <input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">CDK</label><div class="tabbed-content">
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>

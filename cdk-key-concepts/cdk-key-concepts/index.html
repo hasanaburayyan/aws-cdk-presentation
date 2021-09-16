@@ -312,6 +312,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#synthesis" class="md-nav__link">
+    Synthesis
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -330,81 +337,6 @@
     <li class="md-nav__item">
       <a href="../constructs/" class="md-nav__link">
         Constructs
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../stacks/" class="md-nav__link">
-        Stacks
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../synthesis/" class="md-nav__link">
-        Synthesis
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../construct-tree/" class="md-nav__link">
-        Construct tree
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../aspects/" class="md-nav__link">
-        Aspects
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../creating-a-construct/custom-construct/" class="md-nav__link">
-        Create A Custom Construct
       </a>
     </li>
   
@@ -508,6 +440,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#synthesis" class="md-nav__link">
+    Synthesis
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -537,16 +476,16 @@ multiple accounts.</p>
 <p>Stacks are the unit of deployment for CDK. Any resource that is deployed with CDK will be defined within the scope of a stack. CDK stacks are implemented using CloudFormation
 Stacks, so they share the same limitations. There are currently no limits on the number of stacks we can define within our CDK app. Stacks can be managed through the use of
 constructs as well.</p>
-<p><a href="../stacks/">More Stack Details Here</a></p>
 <h2 id="construct-tree">Construct Tree</h2>
 <p>CDK Constructs are managed via the use of the Construct Tree. The construct tree enables us to define constructs inside of other constructs. The tree will maintain the scope
 for each construct. This data structure allows us to easily manage nested stacks, enforce stack deployment order, and even do some cool validation at synthesis time using 
-existing or custom visitors.</p>
-<p><a href="../construct-tree/">More Construct Details Here</a></p>
+existing or custom Aspects.</p>
 <h2 id="aspects">Aspects</h2>
 <p>Aspects allow us to apply some operation to all constructs within a scope. This is enabled by the Construct tree, since the tree maintains scope for all constructs, stacks,
-and resources.</p>
-<p><a href="../aspects/">More Aspect Details Here</a></p>
+and resources. These are AWS CDK's take on the visitor pattern.</p>
+<h2 id="synthesis">Synthesis</h2>
+<p>CDK Synthesis is the process of converting our code into usable CloudFormation templates. During Synthesis the Construct tree is traversed and assets will be marked for deployment
+into AWS upon the next CDK deployment.</p>
                 
               
               

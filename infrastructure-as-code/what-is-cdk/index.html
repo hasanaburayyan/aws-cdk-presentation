@@ -349,81 +349,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cdk-key-concepts/stacks/" class="md-nav__link">
-        Stacks
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cdk-key-concepts/synthesis/" class="md-nav__link">
-        Synthesis
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cdk-key-concepts/construct-tree/" class="md-nav__link">
-        Construct tree
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cdk-key-concepts/aspects/" class="md-nav__link">
-        Aspects
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../creating-a-construct/custom-construct/" class="md-nav__link">
-        Create A Custom Construct
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../creating-a-construct/testing-cdk/" class="md-nav__link">
         Testing CDK
       </a>
@@ -541,8 +466,11 @@
 <p>AWS Cloud Development Kit (CDK) is an opensource software development framework used to define our Infrastructure as Code (IaC). Using CDK allows us to use familiar programming languages
 to provision our AWS Resources. At its core CDK makes use of AWS CloudFormation in order to deploy our AWS resources. This makes having some level of CloudFormation understanding
 very useful as you continue to create your CDK application templates.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p><em>Important Note:</em> Keep in mind, though CDK uses CloudFormation we are NOT writing CloudFormation templates in Typescript or Python. We are writing CDK code that happens to 
 use CloudFormation for deployment.</p>
+</div>
 <h2 id="cdk-vs-pure-cloudformation">CDK vs. Pure CloudFormation</h2>
 <p>This is a loaded topic, which we will discuss at length all through this repo. For now from a high level view here are some key benefits of choosing CDK.</p>
 <h3 id="imperative-vs-declarative">Imperative vs. Declarative</h3>
@@ -560,15 +488,29 @@ Both Imperative and Declarative programming are paradigms that can be followed w
 imperative programming languages that we used to create our CDK definitions. The idea of using an imperative language to create declarative templates may be a little strange at 
 first, however we will soon see the simplicity behind the concept and what benefits we gain by using it.</p>
 <h3 id="language-choices">Language Choices</h3>
-<p>CDK currently supports:
-- Fully Supported:
-    - TypeScript
-- Supported With Experimental Features:
-    - Python
-    - Java
-    - C#
-- Developer Preview Available:
-    - GO</p>
+<p>CDK currently supports:</p>
+<ul>
+<li>
+<p>Fully Supported:</p>
+<ul>
+<li>TypeScript</li>
+</ul>
+</li>
+<li>
+<p>Supported With Experimental Features:</p>
+<ul>
+<li>Python</li>
+<li>Java</li>
+<li>C#</li>
+</ul>
+</li>
+<li>
+<p>Developer Preview Available:</p>
+<ul>
+<li>GO</li>
+</ul>
+</li>
+</ul>
 <p><em>Important Note:</em> Only Typescript is fully supported with all CDK features. As well it is the ONLY language that has a testing framework we can use to test our code before
 deploying it.</p>
 <h3 id="overview-of-benefits">Overview of Benefits</h3>
@@ -600,13 +542,15 @@ deploying it.</p>
 <p>The above code snippet produces a CloudFormation template of over 500 lines and 50 resources. <a href="https://github.com/awsdocs/aws-cdk-guide/blob/main/doc_source/my_ecs_construct-stack.yaml">CloudFormation Template HERE</a></p>
 <p>You may also note we did not have to create any IAM roles or policies, that is because CDK will use least privilege principles to generate Roles and Policies for us. 
 Though if we desired defining or adding to the policies we can easily with CDK.</p>
-<p>Some other advantages consist of:
-- Use of logic when defining infrastructure (if statements, loops, etc)
-- Object-oriented techniques that our chosen language provides the tool set for
-- Define high level abstractions, that can be shared across the organization
-- Creating a reusable and sharable infrastructure library
-- Testing infrastructure before we ever deploy
-- IDE Intelli-sense support</p>
+<p>Some other advantages consist of:</p>
+<ul>
+<li>Use of logic when defining infrastructure (if statements, loops, etc)</li>
+<li>Object-oriented techniques that our chosen language provides the tool set for</li>
+<li>Define high level abstractions, that can be shared across the organization</li>
+<li>Creating a reusable and sharable infrastructure library</li>
+<li>Testing infrastructure before we ever deploy</li>
+<li>IDE Intelli-sense support</li>
+</ul>
                 
               
               

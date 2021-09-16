@@ -280,81 +280,6 @@
 
   
   
-  
-    <li class="md-nav__item">
-      <a href="../../cdk-key-concepts/stacks/" class="md-nav__link">
-        Stacks
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cdk-key-concepts/synthesis/" class="md-nav__link">
-        Synthesis
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cdk-key-concepts/construct-tree/" class="md-nav__link">
-        Construct tree
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cdk-key-concepts/aspects/" class="md-nav__link">
-        Aspects
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../custom-construct/" class="md-nav__link">
-        Create A Custom Construct
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
     
   
   
@@ -390,8 +315,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#simple-stack-with-tags" class="md-nav__link">
-    Simple Stack With Tags
+  <a href="#sample-stack-with-tags" class="md-nav__link">
+    Sample Stack With Tags
   </a>
   
 </li>
@@ -467,8 +392,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#simple-stack-with-tags" class="md-nav__link">
-    Simple Stack With Tags
+  <a href="#sample-stack-with-tags" class="md-nav__link">
+    Sample Stack With Tags
   </a>
   
 </li>
@@ -498,7 +423,7 @@
                 
                 
                 <h1 id="testing-cdk">Testing CDK</h1>
-<h2 id="simple-stack-with-tags">Simple Stack With Tags</h2>
+<h2 id="sample-stack-with-tags">Sample Stack With Tags</h2>
 <div class="highlight"><pre><span></span><code><span class="k">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">cdk</span> <span class="kr">from</span> <span class="s2">&quot;@aws-cdk/core&quot;</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span><span class="nx">RemovalPolicy</span><span class="p">}</span> <span class="kr">from</span> <span class="s2">&quot;@aws-cdk/core&quot;</span><span class="p">;</span>
 <span class="k">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">s3</span> <span class="kr">from</span> <span class="s2">&quot;@aws-cdk/aws-s3&quot;</span><span class="p">;</span>
@@ -513,10 +438,8 @@
             <span class="nx">publicReadAccess</span>: <span class="kt">true</span>
         <span class="p">});</span>
 
-        <span class="nx">cdk</span><span class="p">.</span><span class="nx">Tags</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;cas:created-by&quot;</span><span class="p">,</span> <span class="s2">&quot;rainmakers&quot;</span><span class="p">)</span>
-        <span class="nx">cdk</span><span class="p">.</span><span class="nx">Tags</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;cas:department-code&quot;</span><span class="p">,</span> <span class="s2">&quot;C12345&quot;</span><span class="p">)</span>
-        <span class="nx">cdk</span><span class="p">.</span><span class="nx">Tags</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;cas:environment-type&quot;</span><span class="p">,</span> <span class="s2">&quot;sandbox&quot;</span><span class="p">)</span>
-        <span class="nx">cdk</span><span class="p">.</span><span class="nx">Tags</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;cas:owner&quot;</span><span class="p">,</span> <span class="s2">&quot;rainmakers@cas.org&quot;</span><span class="p">)</span>
+        <span class="nx">cdk</span><span class="p">.</span><span class="nx">Tags</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;created-by&quot;</span><span class="p">,</span> <span class="s2">&quot;me&quot;</span><span class="p">)</span>
+        <span class="nx">cdk</span><span class="p">.</span><span class="nx">Tags</span><span class="p">.</span><span class="k">of</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="s2">&quot;contact-fax&quot;</span><span class="p">,</span> <span class="s2">&quot;614-555-1122&quot;</span><span class="p">)</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -537,16 +460,10 @@
     <span class="nx">expectCDK</span><span class="p">(</span><span class="nx">stack</span><span class="p">).</span><span class="nx">to</span><span class="p">(</span><span class="nx">haveResourceLike</span><span class="p">(</span><span class="s2">&quot;AWS::S3::Bucket&quot;</span><span class="p">,</span> <span class="p">{</span>
         <span class="s2">&quot;Tags&quot;</span><span class="o">:</span> <span class="p">[</span>
             <span class="p">{</span>
-                <span class="s2">&quot;Key&quot;</span><span class="o">:</span> <span class="s2">&quot;cas:created-by&quot;</span>
+                <span class="s2">&quot;Key&quot;</span><span class="o">:</span> <span class="s2">&quot;created-by&quot;</span>
             <span class="p">},</span>
             <span class="p">{</span>
-                <span class="s2">&quot;Key&quot;</span><span class="o">:</span> <span class="s2">&quot;cas:department-code&quot;</span>
-            <span class="p">},</span>
-            <span class="p">{</span>
-                <span class="s2">&quot;Key&quot;</span><span class="o">:</span> <span class="s2">&quot;cas:environment-type&quot;</span>
-            <span class="p">},</span>
-            <span class="p">{</span>
-                <span class="s2">&quot;Key&quot;</span><span class="o">:</span> <span class="s2">&quot;cas:owner&quot;</span>
+                <span class="s2">&quot;Key&quot;</span><span class="o">:</span> <span class="s2">&quot;contact-fax&quot;</span>
             <span class="p">}</span>
         <span class="p">]</span>
     <span class="p">}))</span>
@@ -571,7 +488,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../custom-construct/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Create A Custom Construct" rel="prev">
+        <a href="../../cdk-key-concepts/constructs/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Constructs" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -580,7 +497,7 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              Create A Custom Construct
+              Constructs
             </div>
           </div>
         </a>
