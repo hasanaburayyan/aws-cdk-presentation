@@ -1,16 +1,12 @@
-import { App } from '@aws-cdk/core';
-import { PubSubModel } from './sample-pub-sub';
-
-
-// for development, use account/region from cdk cli
-const devEnv = {
-  account: process.env.CDK_DEFAULT_ACCOUNT,
-  region: process.env.CDK_DEFAULT_REGION,
-};
+import { App, Aspects } from '@aws-cdk/core';
+import { getPermissionsBoundaryArn } from './common-functions';
+import { MyProject } from './in_case_demo_emergency/my-project-construct';
+import { RoleAspect } from './in_case_demo_emergency/role-aspect';
 
 const app = new App();
 
-new PubSubModel(app, 'my-pub-sub-stack', { env: devEnv });
+new MyProject(app, 'my-project');
 
+Aspects.of(app).add(new RoleAspect(getPermissionsBoundaryArn()));
 
 app.synth();

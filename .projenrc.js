@@ -7,8 +7,14 @@ const project = new AwsCdkTypeScriptApp({
     '@aws-cdk/core',
     '@aws-cdk/aws-sns',
     '@aws-cdk/aws-sqs',
+    '@aws-cdk/aws-iam',
+    '@aws-cdk/aws-s3',
     '@aws-cdk/aws-lambda',
     '@aws-cdk/aws-lambda-event-sources',
+    '@aws-cdk/aws-codepipeline-actions',
+    '@aws-cdk/aws-codebuild',
+    '@aws-cdk/aws-codecommit',
+    '@aws-cdk/aws-codepipeline',
   ],
   // deps: [],                          /* Runtime dependencies of this module. */
   // description: undefined,            /* The description is just a string that helps people understand the purpose of the package. */
