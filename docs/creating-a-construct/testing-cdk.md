@@ -1,6 +1,6 @@
 # Testing CDK
 
-## Simple Stack With Tags
+## Sample Stack With Tags
 ```typescript
 import * as cdk from "@aws-cdk/core";
 import {RemovalPolicy} from "@aws-cdk/core";
@@ -16,10 +16,8 @@ export class SampleStack extends cdk.Stack {
             publicReadAccess: true
         });
 
-        cdk.Tags.of(this).add("cas:created-by", "rainmakers")
-        cdk.Tags.of(this).add("cas:department-code", "C12345")
-        cdk.Tags.of(this).add("cas:environment-type", "sandbox")
-        cdk.Tags.of(this).add("cas:owner", "rainmakers@cas.org")
+        cdk.Tags.of(this).add("created-by", "me")
+        cdk.Tags.of(this).add("contact-fax", "614-555-1122")
     }
 }
 
@@ -43,16 +41,10 @@ test('Check Tags', () => {
     expectCDK(stack).to(haveResourceLike("AWS::S3::Bucket", {
         "Tags": [
             {
-                "Key": "cas:created-by"
+                "Key": "created-by"
             },
             {
-                "Key": "cas:department-code"
-            },
-            {
-                "Key": "cas:environment-type"
-            },
-            {
-                "Key": "cas:owner"
+                "Key": "contact-fax"
             }
         ]
     }))

@@ -1,5 +1,7 @@
 ### Construct Levels:
+
 The construct library includes 3 level of constructs available to us.
+
 - L1 Cfn Resources
     - these constructs are very low level. They represent CloudFormation resources, and require you to explicitly configure all resource properties which requires a deep
       understanding of the CloudFormation resource model.
@@ -13,7 +15,7 @@ The construct library includes 3 level of constructs available to us.
 #### Examples
 ##### Level 1 Construct CfnVPC
 Here I create a level 1 vpc construct. This construct has 1 required property `cidrBlock` which you can see matches exactly with the required properties in CloudFormation for
-VPC creation https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpc.html.
+VPC creation <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpc.html">CloudFormation Definition</a>.
 ```typescript
 new ec2.CfnVPC(this, 'level1-vpc', {
             cidrBlock: "10.0.0.0/16"
@@ -98,6 +100,7 @@ new ecsPatterns.ApplicationLoadBalancedFargateService(this, 'level3-ecs-pattern'
 ```
 Now when we take a look at our construct tree we can see that many resources are being created here just like with the previous level 2 examples. The big
 difference here is that this level 3 construct is creating resources from other libraries other than just the ecs package. We can see below the following:
+
 - ecs (cluster, task, services)
 - ec2 (load balancers, security groups, vpc, etc...)
 - Cloudwatch (log groups)

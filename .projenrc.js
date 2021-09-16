@@ -9,6 +9,7 @@ const project = new AwsCdkTypeScriptApp({
     '@aws-cdk/aws-sqs',
     '@aws-cdk/aws-iam',
     '@aws-cdk/aws-s3',
+    '@aws-cdk/aws-events-targets',
     '@aws-cdk/aws-lambda',
     '@aws-cdk/aws-lambda-event-sources',
     '@aws-cdk/aws-codepipeline-actions',

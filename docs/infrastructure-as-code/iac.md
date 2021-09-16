@@ -2,6 +2,10 @@
 
 Infrastructure As Code (IaC) gives us a way to manage the provisioning of our infrastructure resources as code. Making our deployment and configuration process of physical and virtual equipment faster and reliably repeatable. Typically there are two types of IaC, declarative (functional) and imperative (procedural). We will discuss the differences in more depth shortly.
 
+## Basic Pub Sub Model
+
+<img src="../../assets/pub-sub.png">
+
 === "CloudFormation"
     ```yaml linenums="1"
     Resources:

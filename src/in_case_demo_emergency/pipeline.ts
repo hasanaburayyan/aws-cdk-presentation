@@ -1,6 +1,7 @@
 import * as codebuild from '@aws-cdk/aws-codebuild';
 import * as codepipeline from '@aws-cdk/aws-codepipeline';
 import * as codepipelineAction from '@aws-cdk/aws-codepipeline-actions';
+import * as targets from '@aws-cdk/aws-events-targets';
 import * as cdk from '@aws-cdk/core';
 import { MyCodeBuildConstruct } from './codebuild';
 import { MyRepositoryConstruct } from './repository-construct';
@@ -11,7 +12,7 @@ export class MyPipelineConstruct extends cdk.Construct {
 
     const sourceOutput = new codepipeline.Artifact('source-output');
 
-    new codepipeline.Pipeline(this, 'my-pipeline', {
+    const myPipeline = new codepipeline.Pipeline(this, 'my-pipeline', {
       crossAccountKeys: false,
       pipelineName: 'please-work-demo',
       stages: [
@@ -21,6 +22,7 @@ export class MyPipelineConstruct extends cdk.Construct {
             new codepipelineAction.CodeCommitSourceAction({
               actionName: 'source',
               output: sourceOutput,
+              branch: 'main',
               repository: repositoryConstruct.repo,
             }),
           ],
@@ -45,5 +47,9 @@ export class MyPipelineConstruct extends cdk.Construct {
     });
 
     repositoryConstruct.bucket.grantReadWrite(codeBuildConstruct.codeBuildProject);
+    repositoryConstruct.repo.onCommit('main-commit', {
+      target: new targets.CodePipeline(myPipeline),
+      branches: ['main'],
+    });
   }
 }

@@ -4,8 +4,9 @@ AWS Cloud Development Kit (CDK) is an opensource software development framework 
 to provision our AWS Resources. At its core CDK makes use of AWS CloudFormation in order to deploy our AWS resources. This makes having some level of CloudFormation understanding
 very useful as you continue to create your CDK application templates.
 
-*Important Note:* Keep in mind, though CDK uses CloudFormation we are NOT writing CloudFormation templates in Typescript or Python. We are writing CDK code that happens to 
-use CloudFormation for deployment.
+!!! important
+    *Important Note:* Keep in mind, though CDK uses CloudFormation we are NOT writing CloudFormation templates in Typescript or Python. We are writing CDK code that happens to 
+    use CloudFormation for deployment.
 
 ## CDK vs. Pure CloudFormation
 This is a loaded topic, which we will discuss at length all through this repo. For now from a high level view here are some key benefits of choosing CDK.
@@ -28,12 +29,15 @@ first, however we will soon see the simplicity behind the concept and what benef
 
 ### Language Choices
 CDK currently supports:
+
 - Fully Supported:
     - TypeScript
+
 - Supported With Experimental Features:
     - Python
     - Java
     - C#
+
 - Developer Preview Available:
     - GO
     
@@ -74,6 +78,7 @@ You may also note we did not have to create any IAM roles or policies, that is b
 Though if we desired defining or adding to the policies we can easily with CDK.
 
 Some other advantages consist of:
+
 - Use of logic when defining infrastructure (if statements, loops, etc)
 - Object-oriented techniques that our chosen language provides the tool set for
 - Define high level abstractions, that can be shared across the organization

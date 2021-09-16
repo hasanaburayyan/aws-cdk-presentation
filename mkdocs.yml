@@ -8,7 +8,6 @@ nav:
   - 'infrastructure-as-code/what-is-cdk.md'
   - 'cdk-key-concepts/cdk-key-concepts.md'
   - 'cdk-key-concepts/constructs.md'
-  - 'creating-a-construct/custom-construct.md'
   - 'creating-a-construct/testing-cdk.md'
   - 'building-reusable-code/building-reusable-code.md'
   - 'about/about-me.md'
